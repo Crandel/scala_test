@@ -1,6 +1,6 @@
 class Singleton(name: String) {
   def pr(): String = {
-    return name
+    return "method with name " + name
   }
   override def toString(): String = s"Singleton with name $name"
 }

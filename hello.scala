@@ -6,6 +6,6 @@ object HelloWorld {
     val sin = new Singleton(name)
     println(s"the name is $name and age is $age and sin")
     println(s"the name is $name and age is $age and sin is $sin")
-    println(f"sin is ${sin.pr}")
+    println(f"sin is ${sin.pr}%s")
   }
 }
