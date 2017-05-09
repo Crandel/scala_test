@@ -1,11 +1,16 @@
+import scala.collection.mutable.ArrayBuffer
 object HelloWorld {
   def main(args: Array[String]) {
-    println("before")
-    val age = 29
-    val name = "Vitalii"
-    val sin = new Singleton(name)
-    println(s"the name is $name and age is $age and sin")
-    println(s"the name is $name and age is $age and sin is $sin")
-    println(f"sin is ${sin.pr}%s")
+    var mutList = ArrayBuffer[Int]()
+    mutList.insert(0, 2)
+    println(mutList)
+    mutList += 4
+    println(mutList)
+    mutList ++= Array(455, 677)
+    println(mutList)
+    mutList.insert(1, 5555)
+    println(mutList)
+    mutList(3) = 88888888
+    println(mutList)
   }
 }
