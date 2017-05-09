@@ -1,14 +1,11 @@
+import scala.io.StdIn.{readLine}
 object HelloWorld {
   def main(args: Array[String]) {
-    def listLoop(){
-      val prList = (1 to 11).toList
-      for( i <- prList){
-        if(i == 9){
-          return
-        }
-        println(i)
-      }
-    }
-    listLoop
+    var nmb = 0
+    do {
+      println("Guess number")
+      nmb = readLine.toInt
+    } while(nmb != 15)
+    printf("Congrats the number is %d\n", nmb)
   }
 }
