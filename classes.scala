@@ -27,9 +27,16 @@ object ClassE {
 
     val cls3 = new ClassExample(50)
     println(s"Class with numb=50 -> $cls3")
+    val child = new ChildExample(numb=50)
+    println(s"Child with numb=50 -> $child")
+    child.change
+    println(s"Child with numb=50 -> $child")
   }
 
-  class ClassExample(val name: String, var numb: Int) {
+  abstract class AbsExample(numb: Int){
+    def change()
+  }
+  class ClassExample(val name: String, var numb: Int) extends AbsExample(numb) {
     this.setNumb(numb)
 
     val id = ClassExample.newId
@@ -50,9 +57,6 @@ object ClassE {
       if (name.length > 5){
         this._prName = name
       }
-      // else {
-      //   this._prName = "default"
-      // }
     }
 
     // Another Constructor if class will be created without parameters
@@ -86,8 +90,22 @@ object ClassE {
   }
 
   object ClassExample {
+    private var id = 0
     def newId(): Int = {
-      return 1
+      id = id + 1
+      return id
+    }
+  }
+
+  class ChildExample(name: String, numb: Int, val price: Double = 0.0) extends ClassExample(name, numb){
+    def this(numb: Int){
+      this("No name", 0)
+      this.setNumb(numb)
+    }
+
+    override def change() {
+      this.setNumb(78)
+      this.prName = "fffff name"
     }
   }
 }
