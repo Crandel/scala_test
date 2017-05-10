@@ -12,5 +12,10 @@ object HelloWorld {
     println(mutList)
     mutList(3) = 88888888
     println(mutList)
+    println(f"Sum ${mutList.sum}")
+    println(f"Min ${mutList.min}")
+    println(f"Max ${mutList.max}")
+    val sortList = mutList.sortWith(_<_)
+    println(f"sortList ${sortList}")
   }
 }
