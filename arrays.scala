@@ -1,4 +1,6 @@
 import scala.collection.mutable.ArrayBuffer
+
+
 object ArrayExamples {
   def main(args: Array[String]) {
     var mutList = ArrayBuffer[Int]()
