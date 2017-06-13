@@ -1,5 +1,7 @@
+package simple
+
 object TraitsObject {
-  def main(args : Array[String]){
+  def run(args : Array[String]){
     val superman = new SuperHero("Superman")
     println(superman.fly)
     println(superman.hit)

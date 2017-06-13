@@ -1,5 +1,7 @@
+package simple
+
 object StringExamples {
-  def main(args: Array[String]) {
+  def run(args: Array[String]) {
     println("Start with new line")
     print("Start without new line ")
     print("continue lines")

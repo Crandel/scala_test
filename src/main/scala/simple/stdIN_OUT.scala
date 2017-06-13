@@ -1,10 +1,12 @@
+package simple
+
 import scala.io.StdIn.{readLine}
 import java.io.PrintWriter
 import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 
 object StdINOUTExample {
-  def main(args: Array[String]) {
+  def run(args: Array[String]) {
     var nmb = 0
     val numArray = ArrayBuffer.empty[Int]
     do {

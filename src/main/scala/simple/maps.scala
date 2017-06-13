@@ -1,6 +1,9 @@
+package simple
+
 import scala.collection.mutable.{Map => MMap}
+
 object MapsExample {
-  def main(args: Array[String]) {
+  def run(args: Array[String]) {
     val empl = Map("Manager" -> "Bob", "Secretary" -> "Jack")
 
     if (empl.contains("Manager"))

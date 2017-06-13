@@ -1,8 +1,9 @@
+package simple
+
 import scala.collection.mutable.ArrayBuffer
 
-
 object ArrayExamples {
-  def main(args: Array[String]) {
+  def run(args: Array[String]) {
     var mutList = ArrayBuffer[Int]()
     mutList.insert(0, 2)
     println(mutList)

@@ -1,5 +1,7 @@
+package simple
+
 object ClassE {
-  def main(args : Array[String]){
+  def run(args : Array[String]){
 
     // test different constructors
     val cls = new ClassExample("One param")

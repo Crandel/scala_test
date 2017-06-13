@@ -1,5 +1,7 @@
-import scala.math.{log10}
+package simple
 
+import scala.math.{log10}
+  def run(args: Array[String]) {
 object FunctionsExample {
   def main(args: Array[String]) {
     def listLoop(){
