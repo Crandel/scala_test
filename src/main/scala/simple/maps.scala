@@ -3,7 +3,7 @@ package simple
 import scala.collection.mutable.{Map => MMap}
 
 object MapsExample {
-  def run(args: Array[String]) {
+  def run() {
     val empl = Map("Manager" -> "Bob", "Secretary" -> "Jack")
 
     if (empl.contains("Manager"))

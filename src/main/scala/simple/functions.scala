@@ -1,9 +1,9 @@
 package simple
 
 import scala.math.{log10}
-  def run(args: Array[String]) {
+
 object FunctionsExample {
-  def main(args: Array[String]) {
+  def run() {
     def listLoop(){
       val prList = (1 to 11).toList
       for( i <- prList){
@@ -37,6 +37,5 @@ object FunctionsExample {
     def divider = (n: Double) => n/div
 
     println(s"66 / 5 is ${divider(66.0)}")
-
   }
 }

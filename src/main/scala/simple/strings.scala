@@ -1,7 +1,7 @@
 package simple
 
 object StringExamples {
-  def run(args: Array[String]) {
+  def run() {
     println("Start with new line")
     print("Start without new line ")
     print("continue lines")

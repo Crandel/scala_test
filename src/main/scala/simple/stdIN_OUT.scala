@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 
 object StdINOUTExample {
-  def run(args: Array[String]) {
+  def run() {
     var nmb = 0
     val numArray = ArrayBuffer.empty[Int]
     do {
