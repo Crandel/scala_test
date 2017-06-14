@@ -2,8 +2,9 @@ import simple._
 
 object SimpleApp {
   def main(args: Array[String]) {
-    ArrayExamples.run
+    // ArrayExamples()
     println("*" * 10)
-    ClassE.run()
+    StdINOUTExample()
+    // ClassE()
   }
 }

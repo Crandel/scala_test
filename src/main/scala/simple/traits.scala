@@ -1,7 +1,7 @@
 package simple
 
 object TraitsObject {
-  def run(){
+  def apply(){
     val superman = new SuperHero("Superman")
     println(superman.fly)
     println(superman.hit)

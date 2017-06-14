@@ -1,4 +1,4 @@
-name := "Scal test Project"
+name := "Scala test Project"
 
 version := "0.01"
 

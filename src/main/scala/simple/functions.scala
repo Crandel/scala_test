@@ -3,7 +3,7 @@ package simple
 import scala.math.{log10}
 
 object FunctionsExample {
-  def run() {
+  def apply() {
     def listLoop(){
       val prList = (1 to 11).toList
       for( i <- prList){

@@ -3,7 +3,7 @@ package simple
 import scala.collection.mutable.ArrayBuffer
 
 object ArrayExamples {
-  def run() {
+  def apply() {
     var mutList = ArrayBuffer[Int]()
     mutList.insert(0, 2)
     println(mutList)

@@ -1,7 +1,7 @@
 package simple
 
 object ClassE {
-  def run(){
+  def apply(){
 
     // test different constructors
     val cls = new ClassExample("One param")
