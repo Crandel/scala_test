@@ -1,11 +1,19 @@
 package simple
 
 object TraitsObject {
-  def apply(){
+  def apply(): Unit = {
     val superman = new SuperHero("Superman")
     println(superman.fly)
     println(superman.hit)
     println(superman.ricochet(5.8))
+  }
+
+  abstract class Writer {
+    def write(str: String): Unit
+  }
+
+  trait Upper extends Writer {
+    abstract override def write(str: String) = super.write(str.toUpperCase())
   }
 
   trait Flyable {
@@ -25,4 +33,11 @@ object TraitsObject {
 
     def hit = s"$name is a bulletproof"
   }
+
+  class ConsoleWriter extends Writer {
+    def write(str: String) = println(str)
+  }
+
+  val console = new ConsoleWriter with Upper
+  console.write("some downcase string")
 }

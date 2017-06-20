@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 
 object StdINOUTExample {
-  def apply() {
+  def apply(): Unit = {
     var nmb = 0
     var filename = "test.txt"
     val numArray = ArrayBuffer.empty[Int]

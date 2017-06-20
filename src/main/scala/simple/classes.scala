@@ -1,7 +1,7 @@
 package simple
 
 object ClassE {
-  def apply(){
+  def apply():Unit = {
 
     // test different constructors
     val cls = new ClassExample("One param")
@@ -36,7 +36,7 @@ object ClassE {
   }
 
   abstract class AbsExample(numb: Int){
-    def change()
+    def change(): Unit
   }
   class ClassExample(val name: String, var numb: Int) extends AbsExample(numb) {
     this.setNumb(numb)
@@ -45,7 +45,7 @@ object ClassE {
 
     protected var _prName: String = "Some protected name"
 
-    def setNumb(numb: Int){
+    def setNumb(numb: Int): Unit = {
       if (numb > 10)
         this.numb = numb
       else
@@ -55,7 +55,7 @@ object ClassE {
     def prName = this._prName
 
     // prName_= - mandatory format for setter
-    def prName_=(name: String) {
+    def prName_=(name: String) = {
       if (name.length > 5){
         this._prName = name
       }
@@ -81,7 +81,7 @@ object ClassE {
       return s"Method with name $name and numb $numb"
     }
 
-    def change(){
+    def change(): Unit = {
       // error: reassignment to val - protected attr
       // name = "Change name"
       numb = 123
@@ -105,7 +105,7 @@ object ClassE {
       this.setNumb(numb)
     }
 
-    override def change() {
+    override def change() = {
       this.setNumb(78)
       this.prName = "fffff name"
     }

@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 
 object CSVCleaner {
-  def apply() {
+  def apply() = {
     val filename = "test.csv"
     val content = ArrayBuffer.empty[String]
     var row_number = 0

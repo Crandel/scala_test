@@ -1,7 +1,7 @@
 package simple
 
 object StringExamples {
-  def apply() {
+  def apply() = {
     println("Start with new line")
     print("Start without new line ")
     print("continue lines")

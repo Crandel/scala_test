@@ -3,8 +3,8 @@ package simple
 import scala.math.{log10}
 
 object FunctionsExample {
-  def apply() {
-    def listLoop(){
+  def apply() = {
+    def listLoop():Unit = {
       val prList = (1 to 11).toList
       for( i <- prList){
         if(i == 9){
