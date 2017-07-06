@@ -2,11 +2,11 @@ import simple._
 
 object SimpleApp {
   def main(args: Array[String]) = {
-    // ArrayExamples()
     println("*" * 10)
-    //CSVCleaner()
+    ArrayExamples()
+    // CSVCleaner()
     // StdINOUTExample()
     // ClassE()
-    TraitsObject()
+    // TraitsObject()
   }
 }
