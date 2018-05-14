@@ -4,9 +4,13 @@ object SimpleApp {
   def main(args: Array[String]) = {
     println("*" * 10)
     ArrayExamples()
-    // CSVCleaner()
+    println("-" * 10)
+    CSVCleaner()
+    println("/" * 10)
     // StdINOUTExample()
-    // ClassE()
-    // TraitsObject()
+    println("." * 10)
+    ClassE()
+    println("->" * 10)
+    TraitsObject()
   }
 }
