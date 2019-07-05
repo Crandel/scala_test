@@ -4,13 +4,15 @@ import scala.math.{log10}
 
 object FunctionalPR {
   def apply() = {
-    println("Calculate factorial of 8")
-    val fr = factorial(8)
-    println(fr)
+    val test_num = 15
     println("*" * 10)
-    println("Calculate fibonacci of 8")
-    val fib = fibonacci(8)
-    println(fib)
+    formatResult("fibonacci", test_num, fibonacci(test_num))
+    formatResult("factorial", test_num, factorial(test_num))
+  }
+
+  def formatResult(name: String, n: Int, f: Int => Int) = {
+    val msg = "The %s of %d is % d"
+    msg.format(name, n, f(n))
   }
 
   def factorial(n: Int): Int = {
