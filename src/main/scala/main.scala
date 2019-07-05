@@ -1,7 +1,7 @@
 import simple._
 
 object SimpleApp {
-  def main(args: Array[String]) = {
+  def main(args: Array[String]): Unit = {
     println("*" * 10)
     FunctionalPR()
     // ArrayExamples()

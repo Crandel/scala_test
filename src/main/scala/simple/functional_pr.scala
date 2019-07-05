@@ -5,9 +5,11 @@ import scala.math.{log10}
 object FunctionalPR {
   def apply() = {
     val test_num = 15
+    println("-" * 10)
+    println(formatResult("factorial", test_num, factorial))
     println("*" * 10)
-    formatResult("fibonacci", test_num, fibonacci(test_num))
-    formatResult("factorial", test_num, factorial(test_num))
+    println(formatResult("fibonacci", test_num, fibonacci))
+    println("+" * 10)
   }
 
   def formatResult(name: String, n: Int, f: Int => Int) = {
