@@ -5,15 +5,21 @@ import scala.math.{log10}
 object FunctionalPR {
   def apply() = {
     val test_num = 15
-    println("-" * 10)
     println(formatResult("factorial", test_num, factorial))
-    println("*" * 10)
+    println("-" * 10)
     println(formatResult("fibonacci", test_num, fibonacci))
+    println("*" * 10)
+    println(formatResult("Abs", -test_num, abs))
     println("+" * 10)
   }
 
+  def abs(n: Int): Int = {
+    if (n >= 0) n
+    else -n
+  }
+
   def formatResult(name: String, n: Int, f: Int => Int) = {
-    val msg = "The %s of %d is % d"
+    val msg = "The %s of %d is %d"
     msg.format(name, n, f(n))
   }
 
