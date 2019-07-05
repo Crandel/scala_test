@@ -4,6 +4,9 @@ object SimpleApp {
   def main(args: Array[String]): Unit = {
     println("*" * 10)
     FunctionalPR()
+    val as = Array("fib", "abs", "factorial", "loop")
+    val compare = (p: String) => p == "abs"
+    println(FunctionalPR.first_elem(as, compare))
     // ArrayExamples()
     // println("-" * 10)
     // CSVCleaner()
