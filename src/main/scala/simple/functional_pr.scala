@@ -41,11 +41,23 @@ object FunctionalPR {
   }
 
   def first_elem[A] (as: Array[A], p: A => Boolean): Int = {
+    @annotation.tailrec
     def loop(n: Int): Int = {
       if (n >= as.length) -1
       else if (p(as(n))) n
       else loop(n + 1)
     }
+    loop(0)
+  }
+
+  def isSorted[T](as: Array[T], p: (T, T) => Boolean): Boolean = {
+    @annotation.tailrec
+    def loop(n: Int): Boolean = {
+      if (n >= as.length) true
+      else if (p(as(n), as(n + 1))) false
+      else loop(n + 1)
+    }
+
     loop(0)
   }
 }
