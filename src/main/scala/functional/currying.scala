@@ -5,7 +5,7 @@ object Currying {
     val add5 = add(5)
     println(s"add with 5 and 6 arg: ${add(5)(6)}")
     println(s"add5 with 6 arg: ${add5(6)}")
-    println(s"add5 class is ${add5.getClass}")
+    println(s"add5 class is ${add5.toString}")
     val partOne = addPart(5)_
     val partTwo = addPart(5)(7)
     println(s"addPart(5)_ with '5' arg is ${partOne(5)}")
@@ -19,5 +19,9 @@ object Currying {
 
   def average(a: Int*)(b: Int*)(c: Int*) = {
     0.4 * a.sum/a.length + 0.3 * b.sum/b.length + 0.3 * c.sum/c.length
+  }
+
+  def curry[A, B, C](f:(A, B) => C): A => B => C = {
+    a => b => f(a, b)
   }
 }
