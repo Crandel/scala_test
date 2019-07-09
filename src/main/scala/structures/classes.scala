@@ -1,4 +1,4 @@
-package simple
+package structures
 
 object ClassE {
   def apply():Unit = {

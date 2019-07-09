@@ -1,4 +1,4 @@
-package simple
+package primitives
 
 import scala.collection.mutable.{Map => MMap}
 

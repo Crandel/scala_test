@@ -1,4 +1,4 @@
-package simple
+package primitives
 
 import java.io.PrintWriter
 import java.text.SimpleDateFormat

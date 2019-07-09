@@ -1,8 +1,8 @@
-package simple
+package functional
 
 import scala.math.{log10}
 
-object FunctionalPR {
+object Functions {
   def apply() = {
     val test_num = 15
     println(formatResult("factorial", test_num, factorial))

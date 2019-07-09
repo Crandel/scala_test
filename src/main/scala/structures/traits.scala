@@ -1,4 +1,4 @@
-package simple
+package structures
 
 object TraitsObject {
   def apply(): Unit = {

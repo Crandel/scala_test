@@ -1,4 +1,4 @@
-package simple
+package structures
 
 import scala.math.{log10}
 
