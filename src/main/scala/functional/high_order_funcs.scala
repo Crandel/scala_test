@@ -11,6 +11,15 @@ object Functions {
     println("*" * 10)
     println(formatResult("Abs", -test_num, abs))
     println("+" * 10)
+
+    val as = Array("fib", "abs", "factorial", "loop")
+    val first_comp = (p: String) => p == "abs"
+    println(first_elem(as, first_comp))
+    val str_comp = (x: String, y: String) => x.length > y.length
+    println((isSorted(as, str_comp)))
+    val as_sort = Array("fib", "abs", "factorial", "loopingssss")
+    println("=" * 10)
+    println((isSorted(as_sort, str_comp)))
   }
 
   def abs(n: Int): Int = {
