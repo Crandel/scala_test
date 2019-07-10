@@ -11,18 +11,27 @@ object TestList {
       case Cons(x, xs) => 1 + length(xs)
     }
 
-  def sum(ints: TestList[Int]): Int =
-    ints match {
-      case Nil => 0
-      case Cons(x, xs) => x + sum(xs)
+  def foldRight[A, B](as: TestList[A], z: B)(f: (A, B) => B): B =
+    as match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
     }
 
+  // def sum(ints: TestList[Int]): Int =
+  //   ints match {
+  //     case Nil => 0
+  //     case Cons(x, xs) => x + sum(xs)
+  //   }
+  def sum(ints: TestList[Int]): Int =
+    foldRight(ints, 0)((x, y) => x + y)
+
+  // def product(ds: TestList[Double]): Double =
+  //   ds match {
+  //     case Nil => 1.0
+  //     case Cons(x, xs) => x * product(xs)
+  //   }
   def product(ds: TestList[Double]): Double =
-    ds match {
-      case Nil => 1.0
-      case Cons(0.0, _) => 0.0
-      case Cons(x, xs) => x * product(xs)
-    }
+    foldRight(ds, 0.0)(_ * _)
 
   def apply[A](as: A*): TestList[A] = {
     if (as.isEmpty) Nil
@@ -54,12 +63,12 @@ object TestList {
       }
     }
 
-  def dropWhile[A](l: TestList[A], f: A => Boolean): Option[TestList[A]] =
+  def dropWhile[A](l: TestList[A])(f: A => Boolean): Option[TestList[A]] =
     l match {
       case Nil => None
       case Cons(x, xs) => {
         if (f(x))
-          dropWhile(xs, f)
+          dropWhile(xs)(f)
         else
           Some(l)
       }
@@ -79,14 +88,19 @@ object TestList {
     }
 
   def test() = {
-    val x = TestList(1,2,3,4,5) match {
+    val x = TestList(1,2,3,4,5)
+    val y = TestList(1.0, 2.4, 3.5, 4.1, 5.5)
+    val m_x = x match {
       case Cons(x, Cons(2, Cons(4, _))) => x
       case Nil => 42
       case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
       case Cons(h, t) => h + sum(t)
       case _ => 101
     }
-    println(s"Result of pattern match is ${x}")
+    println(s"Result of pattern match is ${m_x}")
+    val sum_l = sum(x)
+    val product_l = product(y)
+    println(s"Sum is ${sum_l} and product is ${product_l}")
     val empty_l = TestList()
     val empty_tail = tail(empty_l)
     println(s"Test of empty list tail ${empty_tail.toString}")
@@ -104,13 +118,13 @@ object TestList {
     println(s"Test drop 2 first elements: ${drop_l}")
     println(s"Test drop 10 first elements: ${drop_none}")
 
-    val f1 = (x: Int) => x <= 7
-    val f2 = (x: Int) => x >= 700
-    val drop_w_l = dropWhile(test_l, f1)
-    val drop_w_n = dropWhile(test_l, f2)
+    val drop_w_l = dropWhile(test_l)(x => x <= 7)
+    val drop_w_n = dropWhile(test_l)(x => x >= 700)
     println(s"Drop till elem <= 7: ${drop_w_l}")
     println(s"Drop till elem >= 700: ${drop_w_n}")
+    val init_e_l = init(empty_l)
     val init_l = init(test_l)
+    println(s"Init func is ${init_e_l}")
     println(s"Init func is ${init_l}")
   }
 }
