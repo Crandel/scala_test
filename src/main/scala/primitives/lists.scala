@@ -5,63 +5,77 @@ case object Nil extends TestList[Nothing]
 case class Cons[+A] (head: A, tail:TestList[A]) extends TestList[A]
 
 object TestList {
-  def length[A](l: TestList[A]): Int = l match {
-    case Nil => 0
-    case Cons(x, xs) => 1 + length(xs)
-  }
+  def length[A](l: TestList[A]): Int =
+    l match {
+      case Nil => 0
+      case Cons(x, xs) => 1 + length(xs)
+    }
 
-  def sum(ints: TestList[Int]): Int = ints match {
-    case Nil => 0
-    case Cons(x, xs) => x + sum(xs)
-  }
+  def sum(ints: TestList[Int]): Int =
+    ints match {
+      case Nil => 0
+      case Cons(x, xs) => x + sum(xs)
+    }
 
-  def product(ds: TestList[Double]): Double = ds match {
-    case Nil => 1.0
-    case Cons(0.0, _) => 0.0
-    case Cons(x, xs) => x * product(xs)
-  }
+  def product(ds: TestList[Double]): Double =
+    ds match {
+      case Nil => 1.0
+      case Cons(0.0, _) => 0.0
+      case Cons(x, xs) => x * product(xs)
+    }
 
   def apply[A](as: A*): TestList[A] = {
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
   }
 
-  def tail[A](al: TestList[A]): Option[TestList[A]] = al match {
-    case Nil => None
-    case Cons(x, xs) => Some(xs)
-  }
-
-  def setHead[A](h: A, al: TestList[A]): TestList[A] = al match {
-    case Nil => TestList(h)
-    case Cons(x, xs) => Cons(h, xs)
-  }
-
-  def drop[A](l: TestList[A], n: Int): Option[TestList[A]] = l match {
-    case Nil => None
-    case Cons(x, xs) => {
-      if (n >= length(l) - 1)
-        None
-      else if (n == 0)
-        Some(xs)
-      else
-        drop(xs, n - 1)
+  def tail[A](al: TestList[A]): Option[TestList[A]] =
+    al match {
+      case Nil => None
+      case Cons(x, xs) => Some(xs)
     }
-  }
 
-  def dropWhile[A](l: TestList[A], f: A => Boolean): Option[TestList[A]] = l match {
-    case Nil => None
-    case Cons(x, xs) => {
-      if (f(x))
-        dropWhile(xs, f)
-      else
-        Some(l)
+  def setHead[A](h: A, al: TestList[A]): TestList[A] =
+    al match {
+      case Nil => TestList(h)
+      case Cons(x, xs) => Cons(h, xs)
     }
-  }
+
+  def drop[A](l: TestList[A], n: Int): Option[TestList[A]] =
+    l match {
+      case Nil => None
+      case Cons(x, xs) => {
+        if (n >= length(l) - 1)
+          None
+        else if (n == 0)
+          Some(xs)
+        else
+          drop(xs, n - 1)
+      }
+    }
+
+  def dropWhile[A](l: TestList[A], f: A => Boolean): Option[TestList[A]] =
+    l match {
+      case Nil => None
+      case Cons(x, xs) => {
+        if (f(x))
+          dropWhile(xs, f)
+        else
+          Some(l)
+      }
+    }
 
   def append[A](a1: TestList[A], a2: TestList[A]): TestList[A] =
     a1 match {
       case Nil => a2
-      case Cons(h,t) => Cons(h, append(t, a2))
+      case Cons(h, t) => Cons(h, append(t, a2))
+    }
+
+  def init[A](l: TestList[A]): TestList[A] =
+    l match {
+      case Nil => Nil
+      case Cons(x, Nil) => Nil
+      case Cons(x, xs) => Cons(x, init(xs))
     }
 
   def test() = {
@@ -96,5 +110,7 @@ object TestList {
     val drop_w_n = dropWhile(test_l, f2)
     println(s"Drop till elem <= 7: ${drop_w_l}")
     println(s"Drop till elem >= 700: ${drop_w_n}")
+    val init_l = init(test_l)
+    println(s"Init func is ${init_l}")
   }
 }
