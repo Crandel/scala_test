@@ -30,5 +30,16 @@ object TestList {
       case _ => 101
     }
     println(s"Result of pattern match is ${x}")
+    val empty_l = TestList()
+    val empty_tail = tail(empty_l)
+    println(s"Test of empty list tail ${empty_tail.toString}")
+    val test_l = TestList(1, 3, 6)
+    val test_tail = tail(test_l)
+    println(s"Test of tail ${test_tail}")
+  }
+
+  def tail[A](al: TestList[A]): Option[TestList[A]] = al match {
+    case Nil => None
+    case Cons(x, xs) => Some(xs)
   }
 }
