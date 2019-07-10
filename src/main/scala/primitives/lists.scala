@@ -5,6 +5,11 @@ case object Nil extends TestList[Nothing]
 case class Cons[+A] (head: A, tail:TestList[A]) extends TestList[A]
 
 object TestList {
+  def length[A](l: TestList[A]): Int = l match {
+    case Nil => 0
+    case Cons(x, xs) => 1 + length(xs)
+  }
+
   def sum(ints: TestList[Int]): Int = ints match {
     case Nil => 0
     case Cons(x, xs) => x + sum(xs)
@@ -41,6 +46,11 @@ object TestList {
     val new_l = setHead(new_h, test_l)
     println(s"Test setHead function empty list: ${new_empty_l}")
     println(s"Test setHead function: ${new_l}")
+
+    val drop_l = drop(test_l, 1)
+    val drop_none = drop(test_l, 7)
+    println(s"Test drop 1 first elements: ${drop_l}")
+    println(s"Test drop 7 first elements: ${drop_none}")
   }
 
   def tail[A](al: TestList[A]): Option[TestList[A]] = al match {
@@ -52,4 +62,22 @@ object TestList {
     case Nil => TestList(h)
     case Cons(x, xs) => Cons(h, xs)
   }
+
+  def drop[A](l: TestList[A], n: Int): Option[TestList[A]] = l match {
+    case Nil => None
+    case Cons(x, xs) => {
+      if (n >= length(l) - 1)
+        None
+      else if (n == 0)
+        Some(xs)
+      else
+        drop(xs, n - 1)
+    }
+  }
+
+  def append[A](a1: TestList[A], a2: TestList[A]): TestList[A] =
+    a1 match {
+      case Nil => a2
+      case Cons(h,t) => Cons(h, append(t, a2))
+    }
 }
