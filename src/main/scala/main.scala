@@ -1,4 +1,5 @@
 import functional.{Currying, Functions}
+import primitives.ListExample
 
 object StartApp {
   def main(args: Array[String]): Unit = {
@@ -7,5 +8,7 @@ object StartApp {
     println()
     println("Funcs example" * 3)
     Functions()
+    println("Lists")
+    ListExample()
   }
 }
