@@ -36,10 +36,20 @@ object TestList {
     val test_l = TestList(1, 3, 6)
     val test_tail = tail(test_l)
     println(s"Test of tail ${test_tail}")
+    val new_h = 5
+    val new_empty_l = setHead(new_h, empty_l)
+    val new_l = setHead(new_h, test_l)
+    println(s"Test setHead function empty list: ${new_empty_l}")
+    println(s"Test setHead function: ${new_l}")
   }
 
   def tail[A](al: TestList[A]): Option[TestList[A]] = al match {
     case Nil => None
     case Cons(x, xs) => Some(xs)
+  }
+
+  def setHead[A](h: A, al: TestList[A]): TestList[A] = al match {
+    case Nil => TestList(h)
+    case Cons(x, xs) => Cons(h, xs)
   }
 }
