@@ -5,11 +5,14 @@ case object Nil extends TestList[Nothing]
 case class Cons[+A] (head: A, tail:TestList[A]) extends TestList[A]
 
 object TestList {
+  // def length[A](l: TestList[A]): Int =
+  //   l match {
+  //     case Nil => 0
+  //     case Cons(x, xs) => 1 + length(xs)
+  //   }
+
   def length[A](l: TestList[A]): Int =
-    l match {
-      case Nil => 0
-      case Cons(x, xs) => 1 + length(xs)
-    }
+    foldRight(l, 0)((x, y) => 1 + y)
 
   def foldRight[A, B](as: TestList[A], z: B)(f: (A, B) => B): B =
     as match {
@@ -89,6 +92,7 @@ object TestList {
 
   def test() = {
     val x = TestList(1,2,3,4,5)
+    println(s"length of list x is ${length(x)}")
     val y = TestList(1.0, 2.4, 3.5, 4.1, 5.5)
     val m_x = x match {
       case Cons(x, Cons(2, Cons(4, _))) => x
