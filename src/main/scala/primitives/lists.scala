@@ -12,7 +12,7 @@ object TestList {
   //   }
 
   def length[A](l: TestList[A]): Int =
-    foldRight(l, 0)((x, y) => 1 + y)
+    foldLeft(l, 0)((x, y) => 1 + x)
 
   def foldRight[A, B](as: TestList[A], z: B)(f: (A, B) => B): B =
     as match {
@@ -20,13 +20,23 @@ object TestList {
       case Cons(x, xs) => f(x, foldRight(xs, z)(f))
     }
 
+  def foldLeft[A,B](as: TestList[A], z: B)(f: (B, A) => B): B = {
+    @annotation.tailrec
+    def iter(as: TestList[A], acc: B): B =
+      as match {
+        case Nil => acc
+        case Cons(x, xs) => iter(xs, f(acc, x))
+      }
+    iter(as, z)
+  }
+
   // def sum(ints: TestList[Int]): Int =
   //   ints match {
   //     case Nil => 0
   //     case Cons(x, xs) => x + sum(xs)
   //   }
   def sum(ints: TestList[Int]): Int =
-    foldRight(ints, 0)((x, y) => x + y)
+    foldLeft(ints, 0)((x, y) => x + y)
 
   // def product(ds: TestList[Double]): Double =
   //   ds match {
@@ -34,7 +44,7 @@ object TestList {
   //     case Cons(x, xs) => x * product(xs)
   //   }
   def product(ds: TestList[Double]): Double =
-    foldRight(ds, 0.0)(_ * _)
+    foldLeft(ds, 1.0)(_ * _)
 
   def apply[A](as: A*): TestList[A] = {
     if (as.isEmpty) Nil
