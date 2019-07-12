@@ -5,14 +5,17 @@ case object Nil extends FuncList[Nothing]
 case class Cons[+A] (head: A, tail:FuncList[A]) extends FuncList[A]
 
 object FuncList {
-  // def length[A](l: FuncList[A]): Int =
-  //   l match {
-  //     case Nil => 0
-  //     case Cons(x, xs) => 1 + length(xs)
-  //   }
-
   def length[A](l: FuncList[A]): Int =
+    l match {
+      case Nil => 0
+      case Cons(x, xs) => 1 + length(xs)
+    }
+
+  def lengthLeft[A](l: FuncList[A]): Int =
     foldLeft(l, 0)((x, y) => 1 + x)
+
+  def lengthRight[A](l: FuncList[A]): Int =
+    foldRight(l, 0)((x, y) => 1 + y)
 
   def foldRight[A, B](as: FuncList[A], z: B)(f: (A, B) => B): B =
     as match {
