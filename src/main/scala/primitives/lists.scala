@@ -42,13 +42,17 @@ object FuncList {
   def sumRight(ints: FuncList[Int]): Int =
     foldRight(ints, 0)((x, y) => x + y)
 
-  // def product(ds: FuncList[Double]): Double =
-  //   ds match {
-  //     case Nil => 1.0
-  //     case Cons(x, xs) => x * product(xs)
-  //   }
   def product(ds: FuncList[Double]): Double =
+    ds match {
+      case Nil => 1.0
+      case Cons(x, xs) => x * product(xs)
+    }
+
+  def productLeft(ds: FuncList[Double]): Double =
     foldLeft(ds, 1.0)(_ * _)
+
+  def productRight(ds: FuncList[Double]): Double =
+    foldRight(ds, 1.0)(_ * _)
 
   def apply[A](as: A*): FuncList[A] = {
     if (as.isEmpty) Nil
