@@ -1,7 +1,7 @@
-import primitives.{Cons, TestList}
+import primitives.{Cons, FuncList}
 
 object StartApp {
   def main(args: Array[String]): Unit = {
-    TestList.test()
+    FuncList.test()
   }
 }
