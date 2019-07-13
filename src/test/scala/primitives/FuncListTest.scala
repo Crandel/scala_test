@@ -126,4 +126,16 @@ class FuncListTest extends FunSuite {
       FuncList.tail(test_nil_list)
     }
   }
+
+  test("Test setHead function on int list") {
+    assertResult(Some(Cons(43, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6,Nil)))))))){
+      FuncList.setHead(43, test_int_list)
+    }
+  }
+
+  test("Test setHead function on nil list") {
+    assertResult(Cons(3, Nil)){
+      FuncList.setHead(3, test_nil_list)
+    }
+  }
 }
