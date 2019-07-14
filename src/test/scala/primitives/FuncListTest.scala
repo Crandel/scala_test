@@ -91,7 +91,7 @@ class FuncListTest extends FunSuite {
     }
   }
 
-  test("Test  productLeft of double list"){
+  test("Test productLeft of double list"){
     assertResult(2879.968){
       FuncList.productLeft(test_dbl_list)
     }
@@ -103,7 +103,7 @@ class FuncListTest extends FunSuite {
     }
   }
 
-  test("Test  productRight of double list"){
+  test("Test productRight of double list"){
     assertResult(2879.968){
       FuncList.productRight(test_dbl_list)
     }
@@ -116,7 +116,7 @@ class FuncListTest extends FunSuite {
   }
 
   test("Test tail function on int list") {
-    assertResult(Some(Cons(2,Cons(3,Cons(4,Cons(5,Cons(6,Nil))))))){
+    assertResult(Some(Cons(2,Cons(3,Cons(4,Cons(5,Cons(6,Nil))))) )){
       FuncList.tail(test_int_list)
     }
   }
@@ -128,7 +128,7 @@ class FuncListTest extends FunSuite {
   }
 
   test("Test setHead function on int list") {
-    assertResult(Some(Cons(43, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6,Nil)))))))){
+    assertResult(Cons(43, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6,Nil))))))){
       FuncList.setHead(43, test_int_list)
     }
   }
@@ -136,6 +136,60 @@ class FuncListTest extends FunSuite {
   test("Test setHead function on nil list") {
     assertResult(Cons(3, Nil)){
       FuncList.setHead(3, test_nil_list)
+    }
+  }
+
+  test("Test drop function on int list") {
+    assertResult(Some(Cons(4,Cons(5,Cons(6,Nil))))){
+      FuncList.drop(test_int_list, 2)
+    }
+  }
+
+  test("Test drop function on nil list") {
+    assertResult(None){
+      FuncList.drop(test_nil_list, 2)
+    }
+  }
+
+  test("Test dropWhile function on int list with valid func") {
+    assertResult(Some(Cons(4, Cons(5, Cons(6, Nil))))){
+      FuncList.dropWhile(test_int_list)(x => x <= 3)
+    }
+  }
+
+  test("Test dropWhile function on int list with invalid func") {
+    assertResult(None){
+      FuncList.dropWhile(test_int_list)(x => x <= 300)
+    }
+  }
+
+  test("Test dropWhile function on nil list") {
+    assertResult(None){
+      FuncList.dropWhile(test_nil_list)(x => x == Nil)
+    }
+  }
+
+  test("Test append function on int list") {
+    assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6, Cons(7, Cons(8, Cons(9, Nil)))))))))) {
+      FuncList.append(test_int_list, FuncList(7, 8, 9))
+    }
+  }
+
+  test("Test append function on nil list") {
+    assertResult(Cons(7, Cons(8, Cons(9, Nil)))){
+      FuncList.append(test_nil_list, FuncList(7, 8, 9))
+    }
+  }
+
+  test("Test init function on int list") {
+    assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5, Nil)))))) {
+      FuncList.init(test_int_list)
+    }
+  }
+
+  test("Test init function on nil list") {
+    assertResult(Nil){
+      FuncList.init(test_nil_list)
     }
   }
 }
