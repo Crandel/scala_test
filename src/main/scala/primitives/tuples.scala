@@ -1,6 +1,5 @@
 package primitives
 
-// import scala.collection.mutable.{ArrayBuffer, Map => MMap}
 
 object TupleExample {
   def apply() = {
