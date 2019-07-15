@@ -165,7 +165,7 @@ class FuncListTest extends FunSuite {
 
   test("Test dropWhile function on nil list") {
     assertResult(None){
-      FuncList.dropWhile(test_nil_list)(x => x == Nil)
+      FuncList.dropWhile(test_nil_list: FuncList[Int])(x => x <= 300)
     }
   }
 
