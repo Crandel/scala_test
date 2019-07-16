@@ -9,3 +9,5 @@ files/*
 /.settings
 /RUNNING_PID
 .ensime*
+.bloop
+.metals
