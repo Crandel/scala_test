@@ -111,45 +111,8 @@ object FuncList {
       case Cons(x, xs) => Cons(x, init(xs))
     }
 
-  def test() = {
+  def test(): Unit = {
     val x = FuncList(1,2,3,4,5)
-    println(s"length of list x is ${length(x)}")
-    val y = FuncList(1.0, 2.4, 3.5, 4.1, 5.5)
-    val m_x = x match {
-      case Cons(x, Cons(2, Cons(4, _))) => x
-      case Nil => 42
-      case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
-      case Cons(h, t) => h + sum(t)
-      case _ => 101
-    }
-    println(s"Result of pattern match is ${m_x}")
-    val sum_l = sum(x)
-    val product_l = product(y)
-    println(s"Sum is ${sum_l} and product is ${product_l}")
-    val empty_l = FuncList()
-    val empty_tail = tail(empty_l)
-    println(s"Test of empty list tail ${empty_tail.toString}")
-    val test_l = FuncList(1, 3, 6, 7, 89, 65)
-    val test_tail = tail(test_l)
-    println(s"Test of tail ${test_tail}")
-    val new_h = 5
-    val new_empty_l = setHead(new_h, empty_l)
-    val new_l = setHead(new_h, test_l)
-    println(s"Test setHead function empty list: ${new_empty_l}")
-    println(s"Test setHead function: ${new_l}")
-
-    val drop_l = drop(test_l, 2)
-    val drop_none = drop(test_l, 10)
-    println(s"Test drop 2 first elements: ${drop_l}")
-    println(s"Test drop 10 first elements: ${drop_none}")
-
-    val drop_w_l = dropWhile(test_l)(x => x <= 7)
-    val drop_w_n = dropWhile(test_l)(x => x >= 700)
-    println(s"Drop till elem <= 7: ${drop_w_l}")
-    println(s"Drop till elem >= 700: ${drop_w_n}")
-    val init_e_l = init(empty_l)
-    val init_l = init(test_l)
-    println(s"Init func is ${init_e_l}")
-    println(s"Init func is ${init_l}")
+    println(s"FuncList x is ${x.toString}")
   }
 }

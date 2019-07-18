@@ -1,7 +1,7 @@
 package functional
 
 object Currying {
-  def apply() = {
+  def apply(): Unit = {
     val add5 = add(5)
     println(s"add with 5 and 6 arg: ${add(5)(6)}")
     println(s"add5 with 6 arg: ${add5(6)}")
@@ -21,14 +21,14 @@ object Currying {
     val comp_f = (a: Int) => a + 7
     val comp_g = (b: Int) => b + 3
     val comp_res = (comp_f compose comp_g)(5)
-    println(s"Compose example ${comp_res}")
+    println(s"Compose example $comp_res")
   }
 
   def add(x: Int): Int => Int = y => x + y
 
   def addPart(x: Int)(y: Int): Int = x + y
 
-  def average(a: Int*)(b: Int*)(c: Int*) = {
+  def average(a: Int*)(b: Int*)(c: Int*): Double = {
     0.4 * a.sum/a.length + 0.3 * b.sum/b.length + 0.3 * c.sum/c.length
   }
 
