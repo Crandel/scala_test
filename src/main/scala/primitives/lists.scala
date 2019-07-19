@@ -38,6 +38,8 @@ object FuncList {
       case _ => l
     }
 
+  def flatten[A](xs: FuncList[FuncList[A]]): FuncList[A] = foldLeft(xs, FuncList(): FuncList[A])(append)
+
   def foldRight[A, B](as: FuncList[A], z: B)(f: (A, B) => B): B =
     as match {
       case Nil => z

@@ -63,25 +63,32 @@ class FuncListTest extends FunSuite {
     }
   }
 
-  test("init function on int list") {
+  test("flatten function on list") {
+    assertResult(Cons(1, Cons(2, Cons(3, Nil)))) {
+      val test_list = FuncList(FuncList(1, 2, 3))
+      flatten(test_list)
+    }
+
+    assertResult(Nil) {
+      val test_list = FuncList(FuncList())
+      flatten(test_list)
+    }
+  }
+  test("init function") {
     assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5, Nil)))))) {
       init(test_int_list)
     }
-  }
 
-  test("init function on nil list") {
     assertResult(Nil){
       init(test_nil_list)
     }
   }
 
-  test("length of str list"){
+  test("length of list"){
     assertResult(6) {
       length(test_str_list)
     }
-  }
 
-  test("length of nil list"){
     assertResult(0) {
       length(test_nil_list)
     }
