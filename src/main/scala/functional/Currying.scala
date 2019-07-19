@@ -14,13 +14,13 @@ object Currying {
 
     println(s"Currying funcs")
     val cur = curry((a: Int, b: Int) => a * b)
-    println(s"Currying example ${cur(5)(4)}\n")
+    println(s"Currying func ${cur} example ${cur(5)(4)}\n")
     val uncur = uncurry(cur)
-    println(s"Uncurrying example ${uncur(3, 7)}\n")
+    println(s"Uncurrying func ${uncur} example ${uncur(3, 7)}\n")
 
     val comp_f = (a: Int) => a + 7
     val comp_g = (b: Int) => b + 3
-    val comp_res = (comp_f compose comp_g)(5)
+    val comp_res = compose_test(comp_f, comp_g)(5)
     println(s"Compose example $comp_res")
   }
 
@@ -40,7 +40,7 @@ object Currying {
     (a, b) => f(a)(b)
   }
 
-  def compose[A, B, C](f: B => C, g: A => B): A => C = {
+  def compose_test[A, B, C](f: B => C, g: A => B): A => C = {
     a => f(g(a))
   }
 }
