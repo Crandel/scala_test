@@ -5,23 +5,38 @@ case object Nil extends FuncList[Nothing]
 case class Cons[+A] (head: A, tail:FuncList[A]) extends FuncList[A]
 
 object FuncList {
-  def length[A](l: FuncList[A]): Int =
-    l match {
-      case Nil => 0
-      case Cons(_, xs) => 1 + length(xs)
+  def append[A](a1: FuncList[A], a2: FuncList[A]): FuncList[A] =
+    a1 match {
+      case Nil => a2
+      case Cons(h, t) => Cons(h, append(t, a2))
     }
 
-  def lengthLeft[A](l: FuncList[A]): Int =
-    foldLeft(l, 0)((x, _) => 1 + x)
+  def appendLeft[A](a1: FuncList[A], a2: FuncList[A]): FuncList[A] = {
+    foldRight(a1, a2)(Cons(_, _))
+  }
 
-  def lengthRight[A](l: FuncList[A]): Int =
-    foldRight(l, 0)((_, y) => 1 + y)
+  def apply[A](as: A*): FuncList[A] = {
+    if (as.isEmpty) Nil
+    else Cons(as.head, apply(as.tail: _*))
+  }
 
-  def lengthLeftRight[A](l: FuncList[A]): Int =
-    foldLeftRight(l, 0)((x, _) => 1 + x)
+  @annotation.tailrec
+  def drop[A](l: FuncList[A], n: Int): FuncList[A] =
+    n match {
+      case 0 => l
+      case _ => drop(tail(l), n -1)
+    }
 
-  def lengthRightLeft[A](l: FuncList[A]): Int =
-    foldRightLeft(l, 0)((_, y) => 1 + y)
+  @annotation.tailrec
+  def dropWhile[A](l: FuncList[A])(f: A => Boolean): FuncList[A] =
+    l match {
+      case Cons(x, xs) =>
+        if (f(x))
+          dropWhile(xs)(f)
+        else
+          l
+      case _ => l
+    }
 
   def foldRight[A, B](as: FuncList[A], z: B)(f: (A, B) => B): B =
     as match {
@@ -49,6 +64,58 @@ object FuncList {
     foldLeft(as, z)(right_left)
   }
 
+  def init[A](l: FuncList[A]): FuncList[A] =
+    l match {
+      case Nil => Nil
+      case Cons(_, Nil) => Nil
+      case Cons(x, xs) => Cons(x, init(xs))
+    }
+
+  def length[A](l: FuncList[A]): Int =
+    l match {
+      case Nil => 0
+      case Cons(_, xs) => 1 + length(xs)
+    }
+
+  def lengthLeft[A](l: FuncList[A]): Int =
+    foldLeft(l, 0)((x, _) => 1 + x)
+
+  def lengthRight[A](l: FuncList[A]): Int =
+    foldRight(l, 0)((_, y) => 1 + y)
+
+  def lengthLeftRight[A](l: FuncList[A]): Int =
+    foldLeftRight(l, 0)((x, _) => 1 + x)
+
+  def lengthRightLeft[A](l: FuncList[A]): Int =
+    foldRightLeft(l, 0)((_, y) => 1 + y)
+
+  def product(ds: FuncList[Double]): Double =
+    ds match {
+      case Nil => 1.0
+      case Cons(x, xs) => x * product(xs)
+    }
+
+  def productLeft(ds: FuncList[Double]): Double =
+    foldLeft(ds, 1.0)(_ * _)
+
+  def productLeftRight(ds: FuncList[Double]): Double =
+    foldLeftRight(ds, 1.0)(_ * _)
+
+  def productRight(ds: FuncList[Double]): Double =
+    foldRight(ds, 1.0)(_ * _)
+
+  def productRightLeft(ds: FuncList[Double]): Double =
+    foldRightLeft(ds, 1.0)(_ * _)
+
+  def reverse[A](l: FuncList[A]): FuncList[A] =
+    foldLeft(l, Nil: FuncList[A])((x, y) => Cons(y, x))
+
+  def setHead[A](h: A, al: FuncList[A]): FuncList[A] =
+    al match {
+      case Nil => FuncList(h)
+      case Cons(_, xs) => Cons(h, xs)
+    }
+
   def sum(ints: FuncList[Int]): Int =
     ints match {
       case Nil => 0
@@ -61,70 +128,11 @@ object FuncList {
   def sumRight(ints: FuncList[Int]): Int =
     foldRight(ints, 0)((x, y) => x + y)
 
-  def product(ds: FuncList[Double]): Double =
-    ds match {
-      case Nil => 1.0
-      case Cons(x, xs) => x * product(xs)
-    }
 
-  def productLeft(ds: FuncList[Double]): Double =
-    foldLeft(ds, 1.0)(_ * _)
-
-  def productRight(ds: FuncList[Double]): Double =
-    foldRight(ds, 1.0)(_ * _)
-
-  def apply[A](as: A*): FuncList[A] = {
-    if (as.isEmpty) Nil
-    else Cons(as.head, apply(as.tail: _*))
-  }
-
-  def tail[A](al: FuncList[A]): Option[FuncList[A]] =
+  def tail[A](al: FuncList[A]): FuncList[A] =
     al match {
-      case Nil => None
-      case Cons(x, xs) => Some(xs)
-    }
-
-  def setHead[A](h: A, al: FuncList[A]): FuncList[A] =
-    al match {
-      case Nil => FuncList(h)
-      case Cons(x, xs) => Cons(h, xs)
-    }
-
-  def drop[A](l: FuncList[A], n: Int): Option[FuncList[A]] =
-    l match {
-      case Nil => None
-      case Cons(x, xs) => {
-        if (n >= length(l) - 1)
-          None
-        else if (n == 0)
-          Some(xs)
-        else
-          drop(xs, n - 1)
-      }
-    }
-
-  def dropWhile[A](l: FuncList[A])(f: A => Boolean): Option[FuncList[A]] =
-    l match {
-      case Nil => None
-      case Cons(x, xs) => {
-        if (f(x))
-          dropWhile(xs)(f)
-        else
-          Some(l)
-      }
-    }
-
-  def append[A](a1: FuncList[A], a2: FuncList[A]): FuncList[A] =
-    a1 match {
-      case Nil => a2
-      case Cons(h, t) => Cons(h, append(t, a2))
-    }
-
-  def init[A](l: FuncList[A]): FuncList[A] =
-    l match {
       case Nil => Nil
-      case Cons(x, Nil) => Nil
-      case Cons(x, xs) => Cons(x, init(xs))
+      case Cons(_, xs) => xs
     }
 
   def test(): Unit = {
