@@ -7,8 +7,8 @@ case class Cons[+A] (head: A, tail:FuncList[A]) extends FuncList[A]
 object FuncList {
   def add1(xs: FuncList[Int]): FuncList[Int] =
     xs match {
-      case Cons(x, y) => Cons(x + 1, y)
-      case _ => xs
+      case Nil => Nil
+      case Cons(x, y) => Cons(x + 1, add1(y))
   }
 
   def append[A](a1: FuncList[A], a2: FuncList[A]): FuncList[A] =

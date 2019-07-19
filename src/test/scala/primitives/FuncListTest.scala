@@ -9,6 +9,16 @@ class FuncListTest extends FunSuite {
   val test_dbl_list: FuncList[Double] = FuncList(1.4, 2.5, 3.2, 4.6, 6.5, 8.6)
   val test_nil_list: FuncList[Nothing] = FuncList()
 
+  test("add1 function on list") {
+    assertResult(Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Cons(7, Nil))))))) {
+      add1(test_int_list)
+    }
+
+    assertResult(Nil) {
+      add1(test_nil_list)
+    }
+  }
+
   test("append function on list") {
     assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6, Cons(7, Cons(8, Cons(9, Nil)))))))))) {
       append(test_int_list, FuncList(7, 8, 9))
