@@ -5,6 +5,12 @@ case object Nil extends FuncList[Nothing]
 case class Cons[+A] (head: A, tail:FuncList[A]) extends FuncList[A]
 
 object FuncList {
+  def add1(xs: FuncList[Int]): FuncList[Int] =
+    xs match {
+      case Cons(x, y) => Cons(x + 1, y)
+      case _ => xs
+  }
+
   def append[A](a1: FuncList[A], a2: FuncList[A]): FuncList[A] =
     a1 match {
       case Nil => a2
@@ -57,12 +63,12 @@ object FuncList {
   }
 
   def foldLeftRight[A, B](as: FuncList[A], z: B)(f: (B, A) => B): B = {
-    val left_to_right = (a: A, b: B) => f(b, a)
+    val left_to_right: (A, B) => B = (a: A, b: B) => f(b, a)
     foldRight(as, z)(left_to_right)
   }
 
   def foldRightLeft[A, B](as: FuncList[A], z: B)(f: (A, B) => B): B = {
-    val right_left = (b: B, a: A) => f(a, b)
+    val right_left: (B, A) => B = (b: B, a: A) => f(a, b)
     foldLeft(as, z)(right_left)
   }
 
@@ -138,7 +144,7 @@ object FuncList {
     }
 
   def test(): Unit = {
-    val x = FuncList(1,2,3,4,5)
+    val x: FuncList[Int] = FuncList(1,2,3,4,5)
     println(s"FuncList x is ${x.toString}")
   }
 }

@@ -6,7 +6,7 @@ import org.scalatest._
 
 class CurryingTest extends FunSuite {
 
-  test("Test add function"){
+  test("add function"){
     val add5 = add(5)
 
     assertResult(11) {
@@ -25,7 +25,7 @@ class CurryingTest extends FunSuite {
     }
   }
 
-  test("Test addPart function") {
+  test("addPart function") {
     assertResult(10) {
       val partOne = addPart(5) _
       partOne(5)
@@ -37,7 +37,7 @@ class CurryingTest extends FunSuite {
     }
   }
 
-  test("Test average function") {
+  test("average function") {
     assertResult(67.5) { average(90, 100, 110)(30, 40, 70)(10, 40, 85)
     }
 
@@ -45,14 +45,14 @@ class CurryingTest extends FunSuite {
     }
   }
 
-  test("Test curry function") {
+  test("curry function") {
     assertResult(20) {
       val cur_ex = curry((a: Int, b: Int) => a * b)
       cur_ex(5)(4)
     }
   }
 
-  test("Test uncurry function") {
+  test("uncurry function") {
     assertResult(21) {
       val uncurry_func = (x: Int) => (y: Int) => x * y
       val uncurry_res = uncurry(uncurry_func)
@@ -60,7 +60,7 @@ class CurryingTest extends FunSuite {
     }
   }
 
-  test("Test compose function") {
+  test("compose function") {
     assertResult(15) {
       val comp_f = (a: Int) => a + 7
       val comp_g = (b: Int) => b + 3

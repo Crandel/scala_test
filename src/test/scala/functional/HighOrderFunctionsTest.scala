@@ -6,7 +6,7 @@ import functional.HighOrderFunctions._
 class HighOrderFunctionsTest extends FunSuite {
   val as = Array("fib", "abs", "factorial", "loop")
 
-  test("Test abs function") {
+  test("abs function") {
     assertResult(3){
       abs(3)
     }
@@ -16,29 +16,29 @@ class HighOrderFunctionsTest extends FunSuite {
     }
   }
 
-  test("Test fibonacci function") {
+  test("fibonacci function") {
     assertResult(610) {
       fibonacci(15)
     }
   }
 
-  test("Test factorial function") {
+  test("factorial function") {
     assertResult(2004310016) {
       factorial(15)
     }
   }
 
-  test("Test firstElem function") {
+  test("firstElem function") {
     assertResult(1) {
-      val first_comp = (p: String) => p == "abs"
+      val first_comp: String => Boolean = (p: String) => p == "abs"
       firstElem(as, first_comp)
     }
   }
 
-  test("Test isSorted function") {
-    val str_comp = (x: String, y: String) => x.length > y.length
+  test("isSorted function") {
+    val str_comp: (String, String) => Boolean = (x: String, y: String) => x.length > y.length
     assert(!isSorted(as, str_comp))
-    val as_sort = Array("fib", "abs", "factorial", "loopingssss")
+    val as_sort: Array[String] = Array("fib", "abs", "factorial", "loopingssss")
     assert(isSorted(as_sort, str_comp))
   }
 }

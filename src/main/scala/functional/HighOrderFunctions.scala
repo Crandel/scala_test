@@ -2,7 +2,7 @@ package functional
 
 object HighOrderFunctions {
   def apply(): Unit = {
-    val test_num = 15
+    val test_num: Int = 15
     println(formatResult("factorial", test_num, factorial))
     println("-" * 10)
     println(formatResult("fibonacci", test_num, fibonacci))
@@ -10,12 +10,12 @@ object HighOrderFunctions {
     println(formatResult("Abs", -test_num, abs))
     println("+" * 10)
 
-    val as = Array("fib", "abs", "factorial", "loop")
-    val first_comp = (p: String) => p == "abs"
+    val as: Array[String] = Array("fib", "abs", "factorial", "loop")
+    val first_comp: String => Boolean = (p: String) => p == "abs"
     println(firstElem(as, first_comp))
-    val str_comp = (x: String, y: String) => x.length > y.length
+    val str_comp: (String, String) => Boolean = (x: String, y: String) => x.length > y.length
     println(isSorted(as, str_comp))
-    val as_sort = Array("fib", "abs", "factorial", "loopingssss")
+    val as_sort: Array[String] = Array("fib", "abs", "factorial", "loopingssss")
     println("=" * 10)
     println(isSorted(as_sort, str_comp))
   }
@@ -26,7 +26,7 @@ object HighOrderFunctions {
   }
 
   def formatResult(name: String, n: Int, f: Int => Int): String = {
-    val msg = "The %s of %d is %d"
+    val msg: String = "The %s of %d is %d"
     msg.format(name, n, f(n))
   }
 
