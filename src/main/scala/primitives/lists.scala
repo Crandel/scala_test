@@ -53,6 +53,9 @@ object FuncList {
   def filterRight[A](l: FuncList[A])(f: A => Boolean): FuncList[A] =
     foldRight(l, FuncList(): FuncList[A])((a, acc) => if (f(a)) Cons(a, acc) else acc)
 
+  def filterMap[A](l: FuncList[A])(f: A => Boolean): FuncList[A] =
+    flatMap(l)(xs => if (f(xs)) FuncList(xs) else Nil)
+
   def flatMap[A, B](l: FuncList[A])(f: A=> FuncList[B]): FuncList[B] =
     l match {
       case Nil => Nil

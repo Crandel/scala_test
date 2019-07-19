@@ -85,6 +85,17 @@ class FuncListTest extends FunSuite {
     }
   }
 
+  test("filterMap function") {
+    val test_f = (x: Int) => x % 2 == 0
+    assertResult(Cons(2, Cons(4, Cons(6, Nil)))) {
+      filterMap(test_int_list)(test_f)
+    }
+
+    assertResult(Nil) {
+      filterMap(test_nil_list: FuncList[Int])(test_f)
+    }
+  }
+
   test("flatMap function") {
     val test_f = (a: Int) => FuncList(a, a, a)
 
