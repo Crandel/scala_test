@@ -134,6 +134,16 @@ class FuncListTest extends FunSuite {
     }
   }
 
+  test("mapF") {
+    assertResult(Cons("1.4", Cons("2.5", Cons("3.2", Cons("4.6", Cons("6.5", Cons("8.6", Nil))))))) {
+      mapF(test_dbl_list)(x => x.toString)
+    }
+
+    assertResult(Nil) {
+      mapF(test_nil_list)(x => x.toString)
+    }
+  }
+
   test("product of list"){
     assertResult(2879.968){
       product(test_dbl_list)

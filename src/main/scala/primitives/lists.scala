@@ -97,6 +97,12 @@ object FuncList {
   def lengthRightLeft[A](l: FuncList[A]): Int =
     foldRightLeft(l, 0)((_, y) => 1 + y)
 
+  def mapF[A,B](as: FuncList[A])(f: A => B): FuncList[B] =
+    as match {
+      case Nil => Nil
+      case Cons(h, t) => Cons(f(h), mapF(t)(f))
+    }
+
   def product(ds: FuncList[Double]): Double =
     ds match {
       case Nil => 1.0
