@@ -8,14 +8,20 @@ object FuncList {
   def length[A](l: FuncList[A]): Int =
     l match {
       case Nil => 0
-      case Cons(x, xs) => 1 + length(xs)
+      case Cons(_, xs) => 1 + length(xs)
     }
 
   def lengthLeft[A](l: FuncList[A]): Int =
-    foldLeft(l, 0)((x, y) => 1 + x)
+    foldLeft(l, 0)((x, _) => 1 + x)
 
   def lengthRight[A](l: FuncList[A]): Int =
-    foldRight(l, 0)((x, y) => 1 + y)
+    foldRight(l, 0)((_, y) => 1 + y)
+
+  def lengthLeftRight[A](l: FuncList[A]): Int =
+    foldLeftRight(l, 0)((x, _) => 1 + x)
+
+  def lengthRightLeft[A](l: FuncList[A]): Int =
+    foldRightLeft(l, 0)((_, y) => 1 + y)
 
   def foldRight[A, B](as: FuncList[A], z: B)(f: (A, B) => B): B =
     as match {
@@ -31,6 +37,16 @@ object FuncList {
         case Cons(x, xs) => iter(xs, f(acc, x))
       }
     iter(as, z)
+  }
+
+  def foldLeftRight[A, B](as: FuncList[A], z: B)(f: (B, A) => B): B = {
+    val left_to_right = (a: A, b: B) => f(b, a)
+    foldRight(as, z)(left_to_right)
+  }
+
+  def foldRightLeft[A, B](as: FuncList[A], z: B)(f: (A, B) => B): B = {
+    val right_left = (b: B, a: A) => f(a, b)
+    foldLeft(as, z)(right_left)
   }
 
   def sum(ints: FuncList[Int]): Int =

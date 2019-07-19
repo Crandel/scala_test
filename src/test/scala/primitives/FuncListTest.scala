@@ -44,6 +44,30 @@ class FuncListTest extends FunSuite {
     }
   }
 
+  test("Test lenghtLeftRight of str list"){
+    assertResult(6) {
+      FuncList.lengthLeftRight(test_str_list)
+    }
+  }
+
+  test("Test lenghtLeftRight of nil list"){
+    assertResult(0) {
+      FuncList.lengthLeftRight(test_nil_list)
+    }
+  }
+
+  test("Test lenghtRightLeft of str list"){
+    assertResult(6) {
+      FuncList.lengthRightLeft(test_str_list)
+    }
+  }
+
+  test("Test lenghtRightLeft of nil list"){
+    assertResult(0) {
+      FuncList.lengthRightLeft(test_nil_list)
+    }
+  }
+
   test("Test original sum of int list"){
     assertResult(21){
       FuncList.sum(test_int_list)
