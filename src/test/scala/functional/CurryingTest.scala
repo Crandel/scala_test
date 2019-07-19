@@ -1,3 +1,5 @@
+package functional
+
 import functional.Currying.{add, addPart, average, compose_test, curry, uncurry}
 import org.scalatest._
 

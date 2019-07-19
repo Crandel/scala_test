@@ -1,9 +1,7 @@
 package functional
 
-import scala.math.{log10}
-
-object Functions {
-  def apply() = {
+object HighOrderFunctions {
+  def apply(): Unit = {
     val test_num = 15
     println(formatResult("factorial", test_num, factorial))
     println("-" * 10)
@@ -14,12 +12,12 @@ object Functions {
 
     val as = Array("fib", "abs", "factorial", "loop")
     val first_comp = (p: String) => p == "abs"
-    println(first_elem(as, first_comp))
+    println(firstElem(as, first_comp))
     val str_comp = (x: String, y: String) => x.length > y.length
-    println((isSorted(as, str_comp)))
+    println(isSorted(as, str_comp))
     val as_sort = Array("fib", "abs", "factorial", "loopingssss")
     println("=" * 10)
-    println((isSorted(as_sort, str_comp)))
+    println(isSorted(as_sort, str_comp))
   }
 
   def abs(n: Int): Int = {
@@ -27,7 +25,7 @@ object Functions {
     else -n
   }
 
-  def formatResult(name: String, n: Int, f: Int => Int) = {
+  def formatResult(name: String, n: Int, f: Int => Int): String = {
     val msg = "The %s of %d is %d"
     msg.format(name, n, f(n))
   }
@@ -49,7 +47,7 @@ object Functions {
     fib_tail(n, 0, 1)
   }
 
-  def first_elem[A] (as: Array[A], p: A => Boolean): Int = {
+  def firstElem[A](as: Array[A], p: A => Boolean): Int = {
     @annotation.tailrec
     def loop(n: Int): Int = {
       if (n >= as.length) -1
