@@ -1,5 +1,5 @@
-import org.scalatest._
 import functional.Currying
+import org.scalatest._
 
 
 class CurryingTest extends FunSuite {
@@ -21,6 +21,24 @@ class CurryingTest extends FunSuite {
 
     assertResult(5) {
       add5(0)
+    }
+  }
+
+  test("Test addPart function") {
+    assertResult(10) {
+      val partOne = Currying.addPart(5) _
+      partOne(5)
+    }
+
+    assertResult(12) {
+      val partTwo = Currying.addPart(5)(7)
+      partTwo
+    }
+  }
+
+  test("Test average") {
+    assertResult(67.5) {
+      Currying.average(90, 100, 110)(30, 40, 70)(10, 40, 85)
     }
   }
 }
