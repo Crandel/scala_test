@@ -36,13 +36,22 @@ object FuncList {
   @annotation.tailrec
   def dropWhile[A](l: FuncList[A])(f: A => Boolean): FuncList[A] =
     l match {
-      case Cons(x, xs) =>
-        if (f(x))
-          dropWhile(xs)(f)
-        else
-          l
+      case Cons(x, xs) if f(x) => dropWhile(xs)(f)
       case _ => l
     }
+
+  def filter[A](l: FuncList[A])(f: A => Boolean): FuncList[A] =
+    l match {
+      case Nil => Nil
+      case Cons(x, xs) =>
+        if (f(x))
+          Cons(x, filter(xs)(f))
+        else
+          filter(xs)(f)
+    }
+
+  def filterRight[A](l: FuncList[A])(f: A => Boolean): FuncList[A] =
+    foldRight(l, FuncList(): FuncList[A])((a, acc) => if (f(a)) Cons(a, acc) else acc)
 
   def flatten[A](xs: FuncList[FuncList[A]]): FuncList[A] = foldLeft(xs, FuncList(): FuncList[A])(append)
 

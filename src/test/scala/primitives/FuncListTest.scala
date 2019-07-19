@@ -63,6 +63,28 @@ class FuncListTest extends FunSuite {
     }
   }
 
+  test("filter function") {
+    val test_f = (x: Int) => x % 2 == 0
+    assertResult(Cons(2, Cons(4, Cons(6, Nil)))) {
+      filter(test_int_list)(test_f)
+    }
+
+    assertResult(Nil) {
+      filter(test_nil_list: FuncList[Int])(test_f)
+    }
+  }
+
+  test("filterLeft function") {
+    val test_f = (x: Int) => x % 2 == 0
+    assertResult(Cons(2, Cons(4, Cons(6, Nil)))) {
+      filterRight(test_int_list)(test_f)
+    }
+
+    assertResult(Nil) {
+      filterRight(test_nil_list: FuncList[Int])(test_f)
+    }
+  }
+
   test("flatten function on list") {
     assertResult(Cons(1, Cons(2, Cons(3, Nil)))) {
       val test_list: FuncList[FuncList[Int]] = FuncList(FuncList(1, 2, 3))
@@ -74,6 +96,7 @@ class FuncListTest extends FunSuite {
       flatten(test_list)
     }
   }
+
   test("init function") {
     assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5, Nil)))))) {
       init(test_int_list)
