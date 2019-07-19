@@ -147,4 +147,10 @@ object FuncList {
     val x: FuncList[Int] = FuncList(1,2,3,4,5)
     println(s"FuncList x is ${x.toString}")
   }
+
+  def stringify(as: FuncList[Double]): FuncList[String] =
+    as match {
+      case Nil => Nil
+      case Cons(h, t) => Cons(h.toString, stringify(t))
+    }
 }

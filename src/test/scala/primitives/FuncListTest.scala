@@ -204,6 +204,16 @@ class FuncListTest extends FunSuite {
     }
   }
 
+  test("stringify function on double list") {
+    assertResult(Cons("1.4", Cons("2.5", Cons("3.2", Cons("4.6", Cons("6.5", Cons("8.6", Nil))))))) {
+      stringify(test_dbl_list)
+    }
+
+    assertResult(Nil) {
+      stringify(test_nil_list)
+    }
+  }
+
   test("sum of list"){
     assertResult(21){
       sum(test_int_list)
