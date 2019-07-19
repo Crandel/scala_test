@@ -29,13 +29,13 @@ class FuncListTest extends FunSuite {
     }
   }
 
-  test("appendLeft function on list") {
+  test("appendRight function on list") {
     assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6, Cons(7, Cons(8, Cons(9, Nil)))))))))) {
-      appendLeft(test_int_list, FuncList(7, 8, 9))
+      appendRight(test_int_list, FuncList(7, 8, 9))
     }
 
     assertResult(Cons(7, Cons(8, Cons(9, Nil)))){
-      appendLeft(test_nil_list, FuncList(7, 8, 9))
+      appendRight(test_nil_list, FuncList(7, 8, 9))
     }
   }
 
@@ -82,6 +82,24 @@ class FuncListTest extends FunSuite {
 
     assertResult(Nil) {
       filterRight(test_nil_list: FuncList[Int])(test_f)
+    }
+  }
+
+  test("flatMap function") {
+    val test_f = (a: Int) => FuncList(a, a, a)
+
+    assertResult(
+      Cons(1, Cons(1, Cons(1,
+        Cons(2, Cons(2, Cons(2,
+          Cons(3, Cons(3, Cons(3,
+            Cons(4, Cons(4, Cons(4,
+              Cons(5, Cons(5, Cons(5,
+                Cons(6, Cons(6, Cons(6, Nil))))))))))))))))))) {
+      flatMap(test_int_list)(test_f)
+    }
+
+    assertResult(Nil) {
+      flatMap(test_nil_list)(test_f)
     }
   }
 

@@ -17,7 +17,7 @@ object FuncList {
       case Cons(h, t) => Cons(h, append(t, a2))
     }
 
-  def appendLeft[A](a1: FuncList[A], a2: FuncList[A]): FuncList[A] = {
+  def appendRight[A](a1: FuncList[A], a2: FuncList[A]): FuncList[A] = {
     foldRight(a1, a2)(Cons(_, _))
   }
 
@@ -52,6 +52,12 @@ object FuncList {
 
   def filterRight[A](l: FuncList[A])(f: A => Boolean): FuncList[A] =
     foldRight(l, FuncList(): FuncList[A])((a, acc) => if (f(a)) Cons(a, acc) else acc)
+
+  def flatMap[A, B](l: FuncList[A])(f: A=> FuncList[B]): FuncList[B] =
+    l match {
+      case Nil => Nil
+      case Cons(h, t) => append(f(h), flatMap(t)(f))
+    }
 
   def flatten[A](xs: FuncList[FuncList[A]]): FuncList[A] = foldLeft(xs, FuncList(): FuncList[A])(append)
 
