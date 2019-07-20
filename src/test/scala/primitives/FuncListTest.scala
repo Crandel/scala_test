@@ -1,7 +1,7 @@
 package primitives
 
-import primitives.FuncList._
 import org.scalatest._
+import primitives.FuncList._
 
 class FuncListTest extends FunSuite {
   val test_str_list: FuncList[String] = FuncList("uk", "usa", "canada", "ukraine", "germany", "netherlands")
@@ -313,6 +313,16 @@ class FuncListTest extends FunSuite {
 
     assertResult(Nil){
       tail(test_nil_list)
+    }
+  }
+
+  test("zipWith function") {
+    assertResult(Cons(3, Cons(5, Cons(7, Cons(9, Cons(11, Cons(13, Nil))))))) {
+      val new_l = add1(test_int_list)
+      zipWith(test_int_list, new_l)((x, y) => x + y)
+    }
+    assertResult(Nil) {
+      zipWith(test_nil_list: FuncList[Int], test_nil_list: FuncList[Int])((x, y) => x + y)
     }
   }
 }

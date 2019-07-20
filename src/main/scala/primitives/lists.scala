@@ -161,6 +161,12 @@ object FuncList {
     foldRight(ints, 0)((x, y) => x + y)
 
 
+  def stringify(as: FuncList[Double]): FuncList[String] =
+    as match {
+      case Nil => Nil
+      case Cons(h, t) => Cons(h.toString, stringify(t))
+    }
+
   def tail[A](al: FuncList[A]): FuncList[A] =
     al match {
       case Nil => Nil
@@ -172,9 +178,10 @@ object FuncList {
     println(s"FuncList x is ${x.toString}")
   }
 
-  def stringify(as: FuncList[Double]): FuncList[String] =
-    as match {
-      case Nil => Nil
-      case Cons(h, t) => Cons(h.toString, stringify(t))
+  def zipWith[A, B, C](ls: FuncList[A], rs: FuncList[B])(f: (A, B) => C): FuncList[C] =
+    (ls, rs) match {
+      case (Nil, _) => Nil
+      case (_, Nil) => Nil
+      case (Cons(lh, lt), Cons(rh, rt)) => Cons(f(lh, rh), zipWith(lt, rt)(f))
     }
 }
