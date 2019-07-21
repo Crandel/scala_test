@@ -1,7 +1,7 @@
-package primitives
+package structures
 
 import org.scalatest._
-import primitives.FuncList._
+import structures.FuncList._
 
 class FuncListTest extends FunSuite {
   val test_str_list: FuncList[String] = FuncList("uk", "usa", "canada", "ukraine", "germany", "netherlands")

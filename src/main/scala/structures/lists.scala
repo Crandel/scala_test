@@ -1,4 +1,4 @@
-package primitives
+package structures
 
 sealed trait FuncList[+A]
 case object Nil extends FuncList[Nothing]

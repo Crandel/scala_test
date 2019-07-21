@@ -1,4 +1,4 @@
-package primitives
+package examples
 
 object StringExamples {
   def apply() = {

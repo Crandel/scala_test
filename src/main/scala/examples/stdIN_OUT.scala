@@ -1,4 +1,4 @@
-package primitives
+package examples
 
 import scala.io.StdIn.{readLine}
 import java.io.PrintWriter

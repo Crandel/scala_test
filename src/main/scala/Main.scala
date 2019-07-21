@@ -1,4 +1,4 @@
-import primitives.FuncList
+import structures.FuncList
 import functional.{Currying, HighOrderFunctions}
 
 object Main {

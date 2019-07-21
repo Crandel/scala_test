@@ -1,9 +1,9 @@
-package primitives
+package structures
 
 import scala.collection.mutable.ArrayBuffer
 
 object ArrayExamples {
-  def apply() = {
+  def apply(): Unit = {
     var INSERT_QUERY = "INSERT INTO $database.$table VALUES "
     var valueList = ArrayBuffer(
       ArrayBuffer("First1", "Second1", "Third1"),
