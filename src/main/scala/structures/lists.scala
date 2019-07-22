@@ -30,7 +30,7 @@ object ListF {
   def drop[A](l: ListF[A], n: Int): ListF[A] =
     n match {
       case 0 => l
-      case _ => drop(tail(l), n -1)
+      case _ => drop(tail(l), n - 1)
     }
 
   @annotation.tailrec

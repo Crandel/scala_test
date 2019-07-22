@@ -6,22 +6,52 @@ class StreamFTest extends FunSuite {
   val test_int_stream: StreamF[Int] = StreamF(5, 4, 3, 2, 1)
   val test_empty_stream: StreamF[Nothing] = StreamF()
 
-  test("headOption method") {
-    assertResult(Some(5)) {
+  test("drop method"){
+    assertResult(3 :: 2 :: 1 :: Nil){
+      test_int_stream.drop(2).toList
+    }
+
+    assertResult(EmptyFS){
+      test_empty_stream.drop(5)
+    }
+  }
+
+  test("headOption method"){
+    assertResult(Some(5)){
       test_int_stream.headOption
     }
 
-    assertResult(None) {
+    assertResult(None){
       test_empty_stream.headOption
     }
   }
 
-  test("toList method") {
-    assertResult(5 :: 4:: 3 :: 2 :: 1 :: Nil) {
+  test("take method"){
+    assertResult(5 :: 4 :: 3 :: Nil){
+      test_int_stream.take(3).toList
+    }
+
+    assertResult(EmptyFS){
+      test_empty_stream.take(5)
+    }
+  }
+
+  test("takeWhile method"){
+    assertResult(5 :: 4 :: 3 :: Nil){
+      test_int_stream.takeWhile(a => a >= 3).toList
+    }
+
+    assertResult(EmptyFS){
+      test_empty_stream.takeWhile(a => a)
+    }
+  }
+
+  test("toList method"){
+    assertResult(5 :: 4 :: 3 :: 2 :: 1 :: Nil){
       test_int_stream.toList
     }
 
-    assertResult(Nil) {
+    assertResult(Nil){
       test_empty_stream.toList
     }
   }
