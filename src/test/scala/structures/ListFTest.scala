@@ -1,137 +1,137 @@
 package structures
 
 import org.scalatest._
-import structures.FuncList._
+import structures.ListF._
 
-class FuncListTest extends FunSuite {
-  val test_str_list: FuncList[String] = FuncList("uk", "usa", "canada", "ukraine", "germany", "netherlands")
-  val test_int_list: FuncList[Int] = FuncList(1, 2, 3, 4, 5, 6)
-  val test_dbl_list: FuncList[Double] = FuncList(1.4, 2.5, 3.2, 4.6, 6.5, 8.6)
-  val test_nil_list: FuncList[Nothing] = FuncList()
+class ListFTest extends FunSuite {
+  val test_str_list: ListF[String] = ListF("uk", "usa", "canada", "ukraine", "germany", "netherlands")
+  val test_int_list: ListF[Int] = ListF(1, 2, 3, 4, 5, 6)
+  val test_dbl_list: ListF[Double] = ListF(1.4, 2.5, 3.2, 4.6, 6.5, 8.6)
+  val test_nil_list: ListF[Nothing] = ListF()
 
   test("add1 function on list") {
-    assertResult(Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Cons(7, Nil))))))) {
+    assertResult(ConFL(2, ConFL(3, ConFL(4, ConFL(5, ConFL(6, ConFL(7, NilFL))))))) {
       add1(test_int_list)
     }
 
-    assertResult(Nil) {
+    assertResult(NilFL) {
       add1(test_nil_list)
     }
   }
 
   test("append function on list") {
-    assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6, Cons(7, Cons(8, Cons(9, Nil)))))))))) {
-      append(test_int_list, FuncList(7, 8, 9))
+    assertResult(ConFL(1, ConFL(2,ConFL(3,ConFL(4,ConFL(5,ConFL(6, ConFL(7, ConFL(8, ConFL(9, NilFL)))))))))) {
+      append(test_int_list, ListF(7, 8, 9))
     }
 
-    assertResult(Cons(7, Cons(8, Cons(9, Nil)))){
-      append(test_nil_list, FuncList(7, 8, 9))
+    assertResult(ConFL(7, ConFL(8, ConFL(9, NilFL)))){
+      append(test_nil_list, ListF(7, 8, 9))
     }
   }
 
   test("appendRight function on list") {
-    assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6, Cons(7, Cons(8, Cons(9, Nil)))))))))) {
-      appendRight(test_int_list, FuncList(7, 8, 9))
+    assertResult(ConFL(1, ConFL(2,ConFL(3,ConFL(4,ConFL(5,ConFL(6, ConFL(7, ConFL(8, ConFL(9, NilFL)))))))))) {
+      appendRight(test_int_list, ListF(7, 8, 9))
     }
 
-    assertResult(Cons(7, Cons(8, Cons(9, Nil)))){
-      appendRight(test_nil_list, FuncList(7, 8, 9))
+    assertResult(ConFL(7, ConFL(8, ConFL(9, NilFL)))){
+      appendRight(test_nil_list, ListF(7, 8, 9))
     }
   }
 
   test("drop function on list") {
-    assertResult(Cons(3, Cons(4,Cons(5,Cons(6,Nil))))){
+    assertResult(ConFL(3, ConFL(4,ConFL(5,ConFL(6,NilFL))))){
       drop(test_int_list, 2)
     }
 
-    assertResult(Nil){
+    assertResult(NilFL){
       drop(test_nil_list, 2)
     }
   }
 
   test("dropWhile function on list with valid func") {
-    assertResult(Cons(4, Cons(5, Cons(6, Nil)))){
+    assertResult(ConFL(4, ConFL(5, ConFL(6, NilFL)))){
       dropWhile(test_int_list)(x => x <= 3)
     }
 
-    assertResult(Nil){
+    assertResult(NilFL){
       dropWhile(test_int_list)(x => x <= 300)
     }
 
-    assertResult(Nil){
-      dropWhile(test_nil_list: FuncList[Int])(x => x <= 300)
+    assertResult(NilFL){
+      dropWhile(test_nil_list: ListF[Int])(x => x <= 300)
     }
   }
 
   test("filter function") {
-    val test_f = (x: Int) => x % 2 == 0
-    assertResult(Cons(2, Cons(4, Cons(6, Nil)))) {
+    val test_f: Int => Boolean = (x: Int) => x % 2 == 0
+    assertResult(ConFL(2, ConFL(4, ConFL(6, NilFL)))) {
       filter(test_int_list)(test_f)
     }
 
-    assertResult(Nil) {
-      filter(test_nil_list: FuncList[Int])(test_f)
+    assertResult(NilFL) {
+      filter(test_nil_list: ListF[Int])(test_f)
     }
   }
 
   test("filterLeft function") {
-    val test_f = (x: Int) => x % 2 == 0
-    assertResult(Cons(2, Cons(4, Cons(6, Nil)))) {
+    val test_f: Int => Boolean = (x: Int) => x % 2 == 0
+    assertResult(ConFL(2, ConFL(4, ConFL(6, NilFL)))) {
       filterRight(test_int_list)(test_f)
     }
 
-    assertResult(Nil) {
-      filterRight(test_nil_list: FuncList[Int])(test_f)
+    assertResult(NilFL) {
+      filterRight(test_nil_list: ListF[Int])(test_f)
     }
   }
 
   test("filterMap function") {
-    val test_f = (x: Int) => x % 2 == 0
-    assertResult(Cons(2, Cons(4, Cons(6, Nil)))) {
+    val test_f: Int => Boolean = (x: Int) => x % 2 == 0
+    assertResult(ConFL(2, ConFL(4, ConFL(6, NilFL)))) {
       filterMap(test_int_list)(test_f)
     }
 
-    assertResult(Nil) {
-      filterMap(test_nil_list: FuncList[Int])(test_f)
+    assertResult(NilFL) {
+      filterMap(test_nil_list: ListF[Int])(test_f)
     }
   }
 
   test("flatMap function") {
-    val test_f = (a: Int) => FuncList(a, a, a)
+    val test_f: Int => ListF[Int] = (a: Int) => ListF(a, a, a)
 
     assertResult(
-      Cons(1, Cons(1, Cons(1,
-        Cons(2, Cons(2, Cons(2,
-          Cons(3, Cons(3, Cons(3,
-            Cons(4, Cons(4, Cons(4,
-              Cons(5, Cons(5, Cons(5,
-                Cons(6, Cons(6, Cons(6, Nil))))))))))))))))))) {
+      ConFL(1, ConFL(1, ConFL(1,
+        ConFL(2, ConFL(2, ConFL(2,
+          ConFL(3, ConFL(3, ConFL(3,
+            ConFL(4, ConFL(4, ConFL(4,
+              ConFL(5, ConFL(5, ConFL(5,
+                ConFL(6, ConFL(6, ConFL(6, NilFL))))))))))))))))))) {
       flatMap(test_int_list)(test_f)
     }
 
-    assertResult(Nil) {
+    assertResult(NilFL) {
       flatMap(test_nil_list)(test_f)
     }
   }
 
   test("flatten function on list") {
-    assertResult(Cons(1, Cons(2, Cons(3, Nil)))) {
-      val test_list: FuncList[FuncList[Int]] = FuncList(FuncList(1, 2, 3))
+    assertResult(ConFL(1, ConFL(2, ConFL(3, NilFL)))) {
+      val test_list: ListF[ListF[Int]] = ListF(ListF(1, 2, 3))
       flatten(test_list)
     }
 
-    assertResult(Nil) {
-      val test_list: FuncList[FuncList[Nothing]] = FuncList(FuncList())
+    assertResult(NilFL) {
+      val test_list: ListF[ListF[Nothing]] = ListF(ListF())
       flatten(test_list)
     }
   }
 
   test("init function") {
-    assertResult(Cons(1, Cons(2,Cons(3,Cons(4,Cons(5, Nil)))))) {
+    assertResult(ConFL(1, ConFL(2,ConFL(3,ConFL(4,ConFL(5, NilFL)))))) {
       init(test_int_list)
     }
 
-    assertResult(Nil){
+    assertResult(NilFL){
       init(test_nil_list)
     }
   }
@@ -187,11 +187,11 @@ class FuncListTest extends FunSuite {
   }
 
   test("mapF") {
-    assertResult(Cons("1.4", Cons("2.5", Cons("3.2", Cons("4.6", Cons("6.5", Cons("8.6", Nil))))))) {
+    assertResult(ConFL("1.4", ConFL("2.5", ConFL("3.2", ConFL("4.6", ConFL("6.5", ConFL("8.6", NilFL))))))) {
       mapF(test_dbl_list)(x => x.toString)
     }
 
-    assertResult(Nil) {
+    assertResult(NilFL) {
       mapF(test_nil_list)(x => x.toString)
     }
   }
@@ -247,31 +247,31 @@ class FuncListTest extends FunSuite {
   }
 
   test("reverse function on list") {
-    assertResult(Cons(6, Cons(5,Cons(4,Cons(3,Cons(2,Cons(1, Nil))))))) {
+    assertResult(ConFL(6, ConFL(5,ConFL(4,ConFL(3,ConFL(2,ConFL(1, NilFL))))))) {
       reverse(test_int_list)
     }
 
-    assertResult(Nil){
+    assertResult(NilFL){
       reverse(test_nil_list)
     }
   }
 
   test("setHead function on list") {
-    assertResult(Cons(43, Cons(2,Cons(3,Cons(4,Cons(5,Cons(6,Nil))))))){
+    assertResult(ConFL(43, ConFL(2,ConFL(3,ConFL(4,ConFL(5,ConFL(6,NilFL))))))){
       setHead(43, test_int_list)
     }
 
-    assertResult(Cons(3, Nil)){
+    assertResult(ConFL(3, NilFL)){
       setHead(3, test_nil_list)
     }
   }
 
   test("stringify function on double list") {
-    assertResult(Cons("1.4", Cons("2.5", Cons("3.2", Cons("4.6", Cons("6.5", Cons("8.6", Nil))))))) {
+    assertResult(ConFL("1.4", ConFL("2.5", ConFL("3.2", ConFL("4.6", ConFL("6.5", ConFL("8.6", NilFL))))))) {
       stringify(test_dbl_list)
     }
 
-    assertResult(Nil) {
+    assertResult(NilFL) {
       stringify(test_nil_list)
     }
   }
@@ -307,22 +307,22 @@ class FuncListTest extends FunSuite {
   }
 
   test("tail function on list") {
-    assertResult(Cons(2,Cons(3,Cons(4,Cons(5,Cons(6,Nil))))) ){
+    assertResult(ConFL(2,ConFL(3,ConFL(4,ConFL(5,ConFL(6,NilFL))))) ){
       tail(test_int_list)
     }
 
-    assertResult(Nil){
+    assertResult(NilFL){
       tail(test_nil_list)
     }
   }
 
   test("zipWith function") {
-    assertResult(Cons(3, Cons(5, Cons(7, Cons(9, Cons(11, Cons(13, Nil))))))) {
-      val new_l = add1(test_int_list)
+    assertResult(ConFL(3, ConFL(5, ConFL(7, ConFL(9, ConFL(11, ConFL(13, NilFL))))))) {
+      val new_l: ListF[Int] = add1(test_int_list)
       zipWith(test_int_list, new_l)((x, y) => x + y)
     }
-    assertResult(Nil) {
-      zipWith(test_nil_list: FuncList[Int], test_nil_list: FuncList[Int])((x, y) => x + y)
+    assertResult(NilFL) {
+      zipWith(test_nil_list: ListF[Int], test_nil_list: ListF[Int])((x, y) => x + y)
     }
   }
 }

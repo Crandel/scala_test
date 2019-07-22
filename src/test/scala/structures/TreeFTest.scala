@@ -1,11 +1,11 @@
 package structures
 
 import org.scalatest._
-import structures.FuncTree._
+import structures.TreeF._
 
-class FuncTreeTest extends FunSuite {
-  val test_int_tree: FuncTree[Int] = Branch(Branch(Leaf(3), Leaf(5)), Branch(Leaf(4), Leaf(6)))
-  val test_str_tree: FuncTree[String] = Branch(Branch(Leaf("abc"), Leaf("defg")), Leaf("ffffff"))
+class TreeFTest extends FunSuite {
+  val test_int_tree: TreeF[Int] = BranchFT(BranchFT(LeafFT(3), LeafFT(5)), BranchFT(LeafFT(4), LeafFT(6)))
+  val test_str_tree: TreeF[String] = BranchFT(BranchFT(LeafFT("abc"), LeafFT("defg")), LeafFT("ffffff"))
   test("sizeT function"){
     assertResult(7){
       sizeT(test_int_tree)
@@ -33,7 +33,7 @@ class FuncTreeTest extends FunSuite {
   }
 
   test("mapT function"){
-    assertResult(Branch(Branch(Leaf("abc111"), Leaf("defg111")), Leaf("ffffff111"))){
+    assertResult(BranchFT(BranchFT(LeafFT("abc111"), LeafFT("defg111")), LeafFT("ffffff111"))){
       mapT(test_str_tree)(x => x + "111")
     }
   }

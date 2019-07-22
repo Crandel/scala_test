@@ -2,13 +2,13 @@ package structures
 
 import org.scalatest._
 
-class FuncOptionTest extends FunSuite {
-  val test_int_option: FuncOption[Int] = Some(3)
-  val test_none: FuncOption[Int] = None
+class OptionFTest extends FunSuite {
+  val test_int_option: OptionF[Int] = SomeF(3)
+  val test_none: OptionF[Int] = NoneF
 
   test("flatMap method"){
-    assertResult(Some("3")){
-      test_int_option.flatMap(a => Some(a.toString))
+    assertResult(SomeF("3")){
+      test_int_option.flatMap(a => SomeF(a.toString))
     }
   }
 
@@ -23,14 +23,14 @@ class FuncOptionTest extends FunSuite {
   }
 
   test("map method"){
-    assertResult(Some("3")){
+    assertResult(SomeF("3")){
       test_int_option.map(_.toString)
     }
   }
 
   test("orElse method"){
-    val test_else: FuncOption[Int] = Some(5)
-    assertResult(Some(3)) {
+    val test_else: OptionF[Int] = SomeF(5)
+    assertResult(SomeF(3)) {
       test_int_option.orElse(test_else)
     }
 

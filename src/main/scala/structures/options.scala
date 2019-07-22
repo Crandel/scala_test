@@ -1,28 +1,28 @@
 package structures
 
-sealed trait FuncOption[+A] {
-  def map[B](f: A=> B): FuncOption[B] =
+sealed trait OptionF[+A] {
+  def map[B](f: A=> B): OptionF[B] =
     this match {
-      case None => None
-      case Some(a) => Some(f(a))
+      case NoneF => NoneF
+      case SomeF(a) => SomeF(f(a))
     }
 
-  def flatMap[B](f: A => FuncOption[B]): FuncOption[B] =
+  def flatMap[B](f: A => OptionF[B]): OptionF[B] =
     this match {
-      case None => None
-      case Some(a) => f(a)
+      case NoneF => NoneF
+      case SomeF(a) => f(a)
     }
 
   def getOrElse[B >: A](default: => B): B =
     this match {
-      case None => default
-      case Some(a) => a
+      case NoneF => default
+      case SomeF(a) => a
     }
-  def orElse[B >: A](default: => FuncOption[B]): FuncOption[B] =
+  def orElse[B >: A](default: => OptionF[B]): OptionF[B] =
     this match {
-      case None => default
-      case Some(a) => Some(a)
+      case NoneF => default
+      case SomeF(a) => SomeF(a)
     }
 }
-case class Some[+A](get: A) extends FuncOption[A]
-case object None extends FuncOption[Nothing]
+case class SomeF[+A](get: A) extends OptionF[A]
+case object NoneF extends OptionF[Nothing]

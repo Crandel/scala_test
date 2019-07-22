@@ -1,31 +1,31 @@
 package structures
 
-sealed trait FuncTree[+A]
-case class Leaf[A](value: A) extends FuncTree[A]
-case class Branch[A](left: FuncTree[A], right: FuncTree[A]) extends FuncTree[A]
+sealed trait TreeF[+A]
+case class LeafFT[A](value: A) extends TreeF[A]
+case class BranchFT[A](left: TreeF[A], right: TreeF[A]) extends TreeF[A]
 
-object FuncTree {
-  def sizeT(at: FuncTree[_]): Int =
+object TreeF {
+  def sizeT(at: TreeF[_]): Int =
     at match {
-      case Leaf(_) => 1
-      case Branch(l, r) => sizeT(l) + sizeT(r) + 1
+      case LeafFT(_) => 1
+      case BranchFT(l, r) => sizeT(l) + sizeT(r) + 1
     }
 
-  def maximumT(at: FuncTree[Int]): Int =
+  def maximumT(at: TreeF[Int]): Int =
     at match {
-      case Leaf(n) => n
-      case Branch(l, r) => maximumT(l) max maximumT(r)
+      case LeafFT(n) => n
+      case BranchFT(l, r) => maximumT(l) max maximumT(r)
     }
 
-  def depthT[A](at: FuncTree[A]): Int =
+  def depthT[A](at: TreeF[A]): Int =
     at match {
-      case Leaf(_) => 1
-      case Branch(l, r) => 1 + depthT(l) max depthT(r)
+      case LeafFT(_) => 1
+      case BranchFT(l, r) => 1 + depthT(l) max depthT(r)
     }
 
-  def mapT[A, B](at: FuncTree[A])(f: (A) => B): FuncTree[B] =
+  def mapT[A, B](at: TreeF[A])(f: (A) => B): TreeF[B] =
     at match {
-      case Leaf(n) => Leaf(f(n))
-      case Branch(l, r) => Branch(mapT(l)(f), mapT(r)(f))
+      case LeafFT(n) => LeafFT(f(n))
+      case BranchFT(l, r) => BranchFT(mapT(l)(f), mapT(r)(f))
     }
 }

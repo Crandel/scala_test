@@ -1,9 +1,9 @@
-import structures.FuncList
+import structures.ListF
 import functional.{Currying, HighOrderFunctions}
 
 object Main {
   def main(args: Array[String]): Unit = {
-    FuncList.test()
+    ListF.test()
     Currying()
     HighOrderFunctions()
   }
