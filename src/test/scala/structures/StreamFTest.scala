@@ -16,6 +16,24 @@ class StreamFTest extends FunSuite {
     }
   }
 
+  test("exists method"){
+    assert(test_int_stream.exists(_ == 5))
+
+    assert(!test_empty_stream.exists(_ == 5))
+  }
+
+  test("existsRight method"){
+    assert(test_int_stream.existsRight(_ == 5))
+
+    assert(!test_empty_stream.existsRight(_ == 5))
+  }
+
+  test("foldRight method"){
+    assert(test_int_stream.foldRight(false)((a, b) => a == 5 || b))
+
+    assert(!test_empty_stream.foldRight(false)((a, b) => a == 5 || b))
+  }
+
   test("headOption method"){
     assertResult(Some(5)){
       test_int_stream.headOption

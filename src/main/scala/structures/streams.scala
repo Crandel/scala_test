@@ -1,6 +1,5 @@
 package structures
 
-
 sealed trait StreamF[+A] {
   def drop(n: Int): StreamF[A] = n match {
     case 0 => this
@@ -9,6 +8,20 @@ sealed trait StreamF[+A] {
       case _ => EmptyFS
     }
   }
+
+  def exists(p: A => Boolean): Boolean = this match {
+    case ConFS(h, t) => p(h()) || t().exists(p)
+    case _ => false
+  }
+
+  def existsRight(p: A => Boolean): Boolean =
+    foldRight(false)((a, b) => p(a) || b)
+
+  def foldRight[B](z: => B)(f: (A, => B) => B): B = this match {
+    case ConFS(h, t) => f(h(), t().foldRight(z)(f))
+    case _ => z
+  }
+
   def headOption: Option[A] = this match {
     case EmptyFS => None
     case ConFS(h, _) => Some(h())
