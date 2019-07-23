@@ -6,7 +6,7 @@ import structures.monoids._
 class MonoidTest extends FunSuite {
   val test_str1: String = "Hello "
   val test_str2: String = "World"
-  val test_str_list = List("aaa", "bbb", "ccc")
+  val test_str_list: List[String] = List("aaa", "bbb", "ccc")
 
   test("StringMonoid"){
     assertResult("Hello World"){
