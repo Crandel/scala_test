@@ -8,16 +8,6 @@ class MonoidTest extends FunSuite {
   val test_int_list: List[Int] = List(3, 4, 6, 8)
   val test_empty_list: List[Nothing] = List()
 
-  test("concatenate function"){
-    assertResult(576){
-      concatenate(test_int_list, IntMultMonoid)
-    }
-
-    assertResult(1){
-      concatenate(test_empty_list, IntMultMonoid)
-    }
-  }
-
   test("IntAddMonoid"){
     assertResult(21){
       test_int_list.foldLeft(IntAddMonoid.zero)(IntAddMonoid.op)
@@ -48,6 +38,26 @@ class MonoidTest extends FunSuite {
 
     assertResult("aaabbbccc"){
       test_str_list.foldLeft(StringMonoid.zero)(StringMonoid.op)
+    }
+  }
+
+  test("concatenate function"){
+    assertResult(576){
+      concatenate(test_int_list, IntMultMonoid)
+    }
+
+    assertResult(1){
+      concatenate(test_empty_list, IntMultMonoid)
+    }
+  }
+
+  test("foldMap function"){
+    assertResult("3468"){
+      foldMap(test_int_list, StringMonoid)(_.toString)
+    }
+
+    assertResult(""){
+      foldMap(test_empty_list: List[Int], StringMonoid)(_.toString)
     }
   }
 }
