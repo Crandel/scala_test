@@ -28,7 +28,7 @@ object monoids {
 
   def IntMultMonoid: Monoid[Int] = new Monoid[Int] {
     def op(a1: Int, a2: Int): Int = a1 * a2
-    def zero: Int = 0
+    def zero: Int = 1
   }
 
   def ListMonoid[A]: Monoid[List[A]] = new Monoid[List[A]] {
@@ -45,4 +45,7 @@ object monoids {
     def op(a1: String, a2: String): String = a1 + a2
     def zero: String = ""
   }
+
+  def concatenate[A](as: List[A], m: Monoid[A]): A =
+    as.foldLeft(m.zero)(m.op)
 }
