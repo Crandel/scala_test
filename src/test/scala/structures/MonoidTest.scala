@@ -7,6 +7,9 @@ class MonoidTest extends FunSuite {
   val test_str_list: List[String] = List("aaa", "bbb", "ccc")
   val test_int_list: List[Int] = List(3, 4, 6, 8)
   val test_empty_list: List[Nothing] = List()
+  val test_int_seq: IndexedSeq[Int] = IndexedSeq(1, 3, 5, 7, 9)
+  val test_empty_seq: IndexedSeq[Nothing] = IndexedSeq()
+
 
   test("IntAddMonoid"){
     assertResult(21){
@@ -58,6 +61,16 @@ class MonoidTest extends FunSuite {
 
     assertResult(""){
       foldMap(test_empty_list: List[Int], StringMonoid)(_.toString)
+    }
+  }
+
+  test("foldMapV function"){
+    assertResult("13579"){
+      foldMapV(test_int_seq, StringMonoid)(_.toString)
+    }
+
+    assertResult(""){
+      foldMapV(test_empty_seq: IndexedSeq[Int], StringMonoid)(_.toString)
     }
   }
 }
