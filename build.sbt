@@ -1,10 +1,10 @@
 name := "Scala test Project"
 
-version := "0.01"
+version := "0.1.0"
 
-scalaVersion := "2.13.0"
+scalaVersion := "2.12.8"
 
-scalaVersion in ThisBuild := "2.13.0"
+scalaVersion in ThisBuild := "2.12.8"
 
 assemblyJarName in assembly := "scala_test.jar"
 
