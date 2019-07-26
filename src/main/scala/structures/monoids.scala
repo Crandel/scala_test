@@ -52,6 +52,14 @@ object monoids {
   def foldMap[A, B](as: List[A], m: Monoid[B])(f: A => B): B =
     as.foldLeft(m.zero)((b, a) => m.op(b, f(a)))
 
+  def foldLeft[A, B](as: List[A])(z: B)(f: (B, A) => B): B = {
+    foldMap(as, EndoMonoid[B])({a: A => (b: B) => f(b, a)})(z)
+  }
+
+  def foldRight[A, B](as: List[A])(z: B)(f: (A, B) => B): B = {
+    foldMap(as, EndoMonoid[() => B])({ a: A => (b: () => B) => () => f(a, b())})(() => z)()
+  }
+
   def foldMapV[A, B](as: IndexedSeq[A], m: Monoid[B])(f: A => B): B = {
     if (as.isEmpty) m.zero
     else if (as.length == 1) m.op(m.zero, f(as(0)))

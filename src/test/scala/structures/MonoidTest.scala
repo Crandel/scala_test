@@ -64,6 +64,26 @@ class MonoidTest extends FunSuite {
     }
   }
 
+  test("foldLeft function"){
+    assertResult(21){
+      foldLeft(test_int_list)(0)(_ + _)
+    }
+
+    assertResult(0){
+      foldLeft(test_empty_list)(0)((a: Int, b: Int) => a + b)
+    }
+  }
+
+  test("foldRight function"){
+    assertResult(21){
+      foldRight(test_int_list)(0)(_ + _)
+    }
+
+    assertResult(0){
+      foldRight(test_empty_list)(0)((a: Int, b: Int) => a + b)
+    }
+  }
+
   test("foldMapV function"){
     assertResult("13579"){
       foldMapV(test_int_seq, StringMonoid)(_.toString)
