@@ -29,7 +29,7 @@ sealed trait StreamF[+A] {
 
   def take(n: Int): StreamF[A] = n match {
     case 0 => EmptyFS
-    case x if x >= n => this match {
+    case _ => this match {
       case EmptyFS => EmptyFS
       case ConFS(h, t) => ConFS(() => h(), () => t().take(n - 1))
     }

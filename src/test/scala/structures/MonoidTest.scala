@@ -1,7 +1,7 @@
 package structures
 
 import org.scalatest._
-import structures.monoids._
+import structures.Monoids._
 
 class MonoidTest extends FunSuite {
   val test_str_list: List[String] = List("aaa", "bbb", "ccc")
@@ -11,23 +11,23 @@ class MonoidTest extends FunSuite {
   val test_empty_seq: IndexedSeq[Nothing] = IndexedSeq()
 
 
-  test("IntAddMonoid"){
+  test("intAddMonoid"){
     assertResult(21){
-      test_int_list.foldLeft(IntAddMonoid.zero)(IntAddMonoid.op)
+      test_int_list.foldLeft(intAddMonoid.zero)(intAddMonoid.op)
     }
 
     assertResult(0){
-      test_empty_list.foldLeft(IntAddMonoid.zero)(IntAddMonoid.op)
+      test_empty_list.foldLeft(intAddMonoid.zero)(intAddMonoid.op)
     }
   }
 
-  test("IntMultMonoid"){
+  test("intMultMonoid"){
     assertResult(576){
-      test_int_list.foldLeft(IntMultMonoid.zero)(IntMultMonoid.op)
+      test_int_list.foldLeft(intMultMonoid.zero)(intMultMonoid.op)
     }
 
     assertResult(1){
-      test_empty_list.foldLeft(IntMultMonoid.zero)(IntMultMonoid.op)
+      test_empty_list.foldLeft(intMultMonoid.zero)(intMultMonoid.op)
     }
   }
 
@@ -46,11 +46,11 @@ class MonoidTest extends FunSuite {
 
   test("concatenate function"){
     assertResult(576){
-      concatenate(test_int_list, IntMultMonoid)
+      concatenate(test_int_list, intMultMonoid)
     }
 
     assertResult(1){
-      concatenate(test_empty_list, IntMultMonoid)
+      concatenate(test_empty_list, intMultMonoid)
     }
   }
 

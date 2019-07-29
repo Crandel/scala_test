@@ -11,3 +11,4 @@ files/*
 .ensime*
 .bloop
 .metals
+.vscode

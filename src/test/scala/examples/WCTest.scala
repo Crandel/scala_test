@@ -1,7 +1,7 @@
 package examples
 
-import org.scalatest._
-import examples.WCExample._
+import org.scalatest.FunSuite
+import examples.WCExample.countWC
 
 class WCTest extends FunSuite {
   val test_str: String = "abc bca blabla gggg rrrrr eeee"

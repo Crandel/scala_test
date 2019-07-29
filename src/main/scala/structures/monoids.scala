@@ -5,38 +5,38 @@ trait Monoid[A]{
   def zero: A
 }
 
-object monoids {
-  def BoolAndMonoid: Monoid[Boolean] = new Monoid[Boolean] {
+object Monoids {
+  def boolAndMonoid: Monoid[Boolean] = new Monoid[Boolean] {
     def op(a1: Boolean, a2: Boolean): Boolean = a1 && a2
     def zero: Boolean = true
   }
 
-  def BoolOrMonoid: Monoid[Boolean] = new Monoid[Boolean] {
+  def boolOrMonoid: Monoid[Boolean] = new Monoid[Boolean] {
     def op(a1: Boolean, a2: Boolean): Boolean = a1 || a2
     def zero: Boolean = false
   }
 
-  def EndoMonoid[A]: Monoid[A => A] = new Monoid[A => A] {
+  def endoMonoid[A]: Monoid[A => A] = new Monoid[A => A] {
     def op(a1: A => A, a2: A => A): A => A = a1 compose a2
     def zero: A => A = identity[A]
   }
 
-  def IntAddMonoid: Monoid[Int] = new Monoid[Int] {
+  def intAddMonoid: Monoid[Int] = new Monoid[Int] {
     def op(a1: Int, a2: Int): Int = a1 + a2
     def zero: Int = 0
   }
 
-  def IntMultMonoid: Monoid[Int] = new Monoid[Int] {
+  def intMultMonoid: Monoid[Int] = new Monoid[Int] {
     def op(a1: Int, a2: Int): Int = a1 * a2
     def zero: Int = 1
   }
 
-  def ListMonoid[A]: Monoid[List[A]] = new Monoid[List[A]] {
+  def listMonoid[A]: Monoid[List[A]] = new Monoid[List[A]] {
     def op(a1: List[A], a2: List[A]): List[A] = a1 ++ a2
     def zero: List[A] = Nil
   }
 
-  def OptionMonoid[A]: Monoid[Option[A]] = new Monoid[Option[A]] {
+  def optionMonoid[A]: Monoid[Option[A]] = new Monoid[Option[A]] {
     def op(a1: Option[A], a2: Option[A]): Option[A] = a1 orElse a2
     def zero: Option[A] = None
   }
@@ -53,11 +53,11 @@ object monoids {
     as.foldLeft(m.zero)((b, a) => m.op(b, f(a)))
 
   def foldLeft[A, B](as: List[A])(z: B)(f: (B, A) => B): B = {
-    foldMap(as, EndoMonoid[B])({a: A => (b: B) => f(b, a)})(z)
+    foldMap(as, endoMonoid[B])({a: A => (b: B) => f(b, a)})(z)
   }
 
   def foldRight[A, B](as: List[A])(z: B)(f: (A, B) => B): B = {
-    foldMap(as, EndoMonoid[() => B])({ a: A => (b: () => B) => () => f(a, b())})(() => z)()
+    foldMap(as, endoMonoid[() => B])({ a: A => (b: () => B) => () => f(a, b())})(() => z)()
   }
 
   def foldMapV[A, B](as: IndexedSeq[A], m: Monoid[B])(f: A => B): B = {
