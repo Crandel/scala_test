@@ -13,13 +13,16 @@ trait Functor[F[_]] {
     }
 }
 
-trait Monad[F[_]] {
-  def mmap[A, B](fa: F[A])(f: A => B): F[B]
+trait Monad[F[_]] extends Functor[F] {
+  def unit[A](a: => A): F[A]
 
-  def mflatMap[A, B](fa: F[A])(f: A => F[B]): F[B]
+  def mflatMap[A, B](ma: F[A])(f: A => F[B]): F[B]
+
+  def fmap[A, B](ma: F[A])(f: A => B): F[B] =
+    mflatMap(ma)(a => unit(f(a)))
 
   def lift[A, B, C](fa: F[A], fb: F[B])(f: (A, B) => C): F[C] =
-    mflatMap(fa)(a => mmap(fb)(b => f(a, b)))
+    mflatMap(fa)(a => fmap(fb)(b => f(a, b)))
 }
 
 
@@ -27,4 +30,8 @@ object MonadsExample {
   val listFunctor = new Functor[List] {
     def fmap[A, B](fa: List[A])(f: A => B): List[B] = fa map f
   }
+
+  val listMonad = new Monad[List] {
+    def unit[A](a: => A): List[A] = List(a)
+    def mflatMap[A, B](ma: List[A])(f: A => List[B]): List[B] = ma flatMap f  }
 }
