@@ -1,6 +1,6 @@
 package structures
 
-import org.scalatest._
+import org.scalatest.FunSuite
 import structures.ListF._
 
 class ListFTest extends FunSuite {
@@ -101,11 +101,11 @@ class ListFTest extends FunSuite {
 
     assertResult(
       ConFL(1, ConFL(1, ConFL(1,
-        ConFL(2, ConFL(2, ConFL(2,
-          ConFL(3, ConFL(3, ConFL(3,
-            ConFL(4, ConFL(4, ConFL(4,
-              ConFL(5, ConFL(5, ConFL(5,
-                ConFL(6, ConFL(6, ConFL(6, NilFL))))))))))))))))))) {
+          ConFL(2, ConFL(2, ConFL(2,
+              ConFL(3, ConFL(3, ConFL(3,
+                  ConFL(4, ConFL(4, ConFL(4,
+                       ConFL(5, ConFL(5, ConFL(5,
+                           ConFL(6, ConFL(6, ConFL(6, NilFL))))))))))))))))))) {
       flatMap(test_int_list)(test_f)
     }
 
@@ -267,7 +267,12 @@ class ListFTest extends FunSuite {
   }
 
   test("stringify function on double list") {
-    assertResult(ConFL("1.4", ConFL("2.5", ConFL("3.2", ConFL("4.6", ConFL("6.5", ConFL("8.6", NilFL))))))) {
+    assertResult(ConFL("1.4",
+                       ConFL("2.5",
+                             ConFL("3.2",
+                                   ConFL("4.6",
+                                         ConFL("6.5",
+                                               ConFL("8.6", NilFL))))))) {
       stringify(test_dbl_list)
     }
 
