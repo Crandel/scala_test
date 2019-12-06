@@ -1,4 +1,4 @@
-package structures
+package functional.structures
 
 trait Functor[F[_]] {
   def fmap[A, B](fa: F[A])(f: A => B): F[B]

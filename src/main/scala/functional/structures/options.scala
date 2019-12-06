@@ -1,4 +1,4 @@
-package structures
+package functional.structures
 
 sealed trait OptionF[+A] {
   def map[B](f: A=> B): OptionF[B] =

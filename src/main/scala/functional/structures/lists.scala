@@ -1,4 +1,4 @@
-package structures
+package functional.structures
 
 sealed trait ListF[+A]
 case object NilFL extends ListF[Nothing]

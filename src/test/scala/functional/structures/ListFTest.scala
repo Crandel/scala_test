@@ -1,7 +1,7 @@
-package structures
+package functional.structures
 
+import functional.structures.ListF._
 import org.scalatest.FunSuite
-import structures.ListF._
 
 class ListFTest extends FunSuite {
   val test_str_list: ListF[String] = ListF("uk", "usa", "canada", "ukraine", "germany", "netherlands")

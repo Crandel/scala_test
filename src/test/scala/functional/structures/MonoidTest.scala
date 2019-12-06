@@ -1,7 +1,7 @@
-package structures
+package functional.structures
 
+import functional.structures.Monoids._
 import org.scalatest._
-import structures.Monoids._
 
 class MonoidTest extends FunSuite {
   val test_str_list: List[String] = List("aaa", "bbb", "ccc")

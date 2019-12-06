@@ -1,4 +1,4 @@
-package structures
+package functional.structures
 
 sealed trait StreamF[+A] {
   def drop(n: Int): StreamF[A] = n match {

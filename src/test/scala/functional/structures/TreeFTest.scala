@@ -1,7 +1,8 @@
-package structures
+package functional.structures
 
 import org.scalatest._
-import structures.TreeF._
+
+import functional.structures.TreeF._
 
 class TreeFTest extends FunSuite {
   val test_int_tree: TreeF[Int] = BranchFT(BranchFT(LeafFT(3), LeafFT(5)), BranchFT(LeafFT(4), LeafFT(6)))

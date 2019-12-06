@@ -1,7 +1,7 @@
-package structures
+package functional.structures
 
+import functional.structures.MonadsExample.{listFunctor, listMonad}
 import org.scalatest.FunSuite
-import structures.MonadsExample.{listFunctor, listMonad}
 
 class MonadTest extends FunSuite {
   val test_int_list1 = List(1, 2, 3)

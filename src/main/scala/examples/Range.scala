@@ -1,7 +1,7 @@
 package examples
 
-import structures.Monoid
-import structures.Monoids.foldMapV
+import functional.structures.Monoid
+import functional.structures.Monoids.foldMapV
 
 sealed trait Range
 case object ZeroRange extends Range

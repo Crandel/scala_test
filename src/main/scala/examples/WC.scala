@@ -1,6 +1,6 @@
 package examples
 
-import structures.Monoid
+import functional.structures.Monoid
 
 
 sealed trait WC

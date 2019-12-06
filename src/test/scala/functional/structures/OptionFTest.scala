@@ -1,4 +1,4 @@
-package structures
+package functional.structures
 
 import org.scalatest._
 

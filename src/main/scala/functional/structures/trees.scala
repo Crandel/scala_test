@@ -1,4 +1,4 @@
-package structures
+package functional.structures
 
 sealed trait TreeF[+A]
 case class LeafFT[A](value: A) extends TreeF[A]
