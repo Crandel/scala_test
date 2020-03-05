@@ -1,8 +1,7 @@
-import functional.{Currying, HighOrderFunctions}
+import parallel.Multitred
 
 object Main {
   def main(args: Array[String]): Unit = {
-    Currying()
-    HighOrderFunctions()
+    Multitred(35)
   }
 }

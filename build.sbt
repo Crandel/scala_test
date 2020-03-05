@@ -10,4 +10,6 @@ assemblyJarName in assembly := "scala_test.jar"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 
+libraryDependencies += "org.scala-lang.modules" %% "scala-parallel-collections" % "0.2.0"
+
 resolvers += Resolver.bintrayIvyRepo("scalacenter", "sbt-releases")
