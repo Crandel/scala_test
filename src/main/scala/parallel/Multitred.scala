@@ -9,7 +9,7 @@ object Multitred{
 
   def tryFutures(n: Int): Unit = {
     val f = Future {
-      for (i <- 1 to n) yield i * 2
+      for (i <- 1 to n) yield fib(i * 2)
     }
 
     f.onComplete{
